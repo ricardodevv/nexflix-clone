@@ -52,7 +52,7 @@ const Header = () => {
           inputProps={{ "aria-label": "language" }}
           sx={{
             bgcolor: "black",
-            height: "2.5rem",
+            height: "2.3rem",
             color: "white",
             border: "1px solid white",
             "& .MuiSvgIcon-root": {
@@ -73,7 +73,7 @@ const Header = () => {
             color: "white",
             fontSize: 17,
             ml: 3,
-            p: "3px 25px",
+            p: "2px 15px",
             "&:hover": {
               transition: "none",
               backgroundColor: "red",

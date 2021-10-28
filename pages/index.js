@@ -3,6 +3,9 @@ import { css, jsx } from "@emotion/react";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import indexjpg from "../src/pictures/index.jpg";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 const Home = () => {
   return (
@@ -18,6 +21,9 @@ const Home = () => {
               position: absolute;
               top: -140px;
               width: 100%;
+              height: 50rem;
+              display: flex;
+              border-bottom: 0.5rem solid gray;
             `}
           >
             <Image src={indexjpg} layout="fill" objectFit="cover"></Image>
@@ -36,23 +42,80 @@ const Home = () => {
             ></div>
             <div
               css={css`
-            position: relative;
-            display: flex;
-            height: 50rem;
-            width 70rem;
-            margin; auto;
-            z-index: 4;
-            align-items: center;
-            justify-content: center;
-          `}
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                height: 50%;
+                width: 40%;
+                margin: auto;
+                z-index: 4;
+                align-items: center;
+                justify-content: center;
+              `}
             >
               <h2
                 css={css`
                   color: white;
+                  font-size: 4rem;
+                  text-align: center;
+                  margin: 0;
+                  line-height: 1.1;
                 `}
               >
-                Películas y series ilimitadas y mucho más.
+                Unlimited movies, TV shows, and more.
               </h2>
+              <p
+                css={css`
+                  color: white;
+                  text-align: center;
+                  margin: 20px 0;
+                  font-size: 1.7rem;
+                `}
+              >
+                Watch anywhere. Cancel anytime.
+              </p>
+              <p
+                css={css`
+                  color: white;
+                  text-align: center;
+                  font-size: 1.2rem;
+                  margin: 0;
+                  padding: 10px 0 20px 0;
+                `}
+              >
+                Ready to watch? Enter your email to create or restart your
+                membership.
+              </p>
+              <Box
+                css={css`
+                  width: 100%;
+                  display: flex;
+                `}
+              >
+                <TextField
+                  fullWidth
+                  label="Email address"
+                  variant="standard"
+                  css={css`
+                    background: white;
+                    color: gray;
+                  `}
+                />
+                <Button
+                  sx={{
+                    width: "10rem",
+                    textTransform: "none",
+                    backgroundColor: "red",
+                    color: "white",
+                    "&:hover": {
+                      transition: "none",
+                      backgroundColor: "red",
+                    },
+                  }}
+                >
+                  Get Started
+                </Button>
+              </Box>
             </div>
           </div>
         </div>
