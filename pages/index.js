@@ -4,8 +4,8 @@ import Layout from "../components/Layout";
 import Image from "next/image";
 import indexjpg from "../src/pictures/index.jpg";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 const Home = () => {
   return (
@@ -94,16 +94,29 @@ const Home = () => {
               >
                 <TextField
                   fullWidth
-                  label="Email address"
+                  label="Email"
                   variant="standard"
-                  css={css`
-                    background: white;
-                    color: gray;
-                  `}
+                  sx={{
+                    background: "white",
+                    "& .MuiInputBase-root:before, .MuiInputBase-root:after, .MuiInput-root:hover:not(.Mui-disabled):before":
+                      {
+                        border: "none",
+                      },
+                    "& .MuiInputBase-root": {
+                      padding: "20px 0 20px 0px",
+                    },
+                    "& .MuiInputLabel-root": {
+                      margin: "5px 0 0 10px",
+                    },
+                    "& .MuiInputBase-input": {
+                      paddingLeft: "10px",
+                    },
+                  }}
                 />
                 <Button
                   sx={{
-                    width: "10rem",
+                    fontSize: "1.5rem",
+                    width: "15rem",
                     textTransform: "none",
                     backgroundColor: "red",
                     color: "white",
