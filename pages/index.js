@@ -137,7 +137,6 @@ const Home = () => {
         </div>
         <div
           css={css`
-            display: flex;
             /* height: 40rem; */
             width: 100%;
             background-color: black;
@@ -155,7 +154,7 @@ const Home = () => {
               sx={{
                 display: "flex",
                 p: 5,
-                width: "100%",
+                width: "80%",
                 height: "100%",
                 margin: "auto",
               }}
@@ -230,18 +229,22 @@ const Home = () => {
                       display: flex;
                     `}
                   >
-                    <video loop>
-                      <source
-                        src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv-0819.m4v"
-                        type="video/mp4"
-                      ></source>
+                    <video autoPlay muted>
+                      <source src="tvloop.mp4" type="video/mp4" />
                     </video>
                   </div>
                 </div>
               </div>
             </Box>
           </div>
-          <div></div>
+          <div
+            css={css`
+              background-color: black;
+              border-bottom: 0.5rem solid #222222;
+              height: 30rem;
+              width: 100%;
+            `}
+          ></div>
           <div></div>
         </div>
       </div>
