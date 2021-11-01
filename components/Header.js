@@ -22,7 +22,6 @@ const Header = () => {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 100vw;
         position: relative;
         z-index: 3;
       `}
