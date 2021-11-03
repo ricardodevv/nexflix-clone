@@ -6,6 +6,8 @@ import Layout from "../components/Layout";
 import Image from "next/image";
 import indexjpg from "../src/pictures/index.jpg";
 import tvimage from "../src/pictures/tv.png";
+import mobileimage from "../src/pictures/mobile.jpg";
+import strangerthings from "../src/pictures/boxshot.png";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -154,7 +156,7 @@ const Home = () => {
               sx={{
                 display: "flex",
                 p: 5,
-                width: "80%",
+                width: "70%",
                 height: "100%",
                 margin: "auto",
               }}
@@ -229,7 +231,7 @@ const Home = () => {
                       display: flex;
                     `}
                   >
-                    <video autoPlay muted>
+                    <video autoPlay loop muted>
                       <source src="tvloop.mp4" type="video/mp4" />
                     </video>
                   </div>
@@ -244,7 +246,110 @@ const Home = () => {
               height: 30rem;
               width: 100%;
             `}
-          ></div>
+          >
+            <Box
+              sx={{
+                display: "flex",
+                p: 5,
+                width: "70%",
+                height: "100%",
+                margin: "auto",
+              }}
+            >
+              <div
+                css={css`
+                  flex: 1;
+                  display: flex;
+                  justify-content: center;
+                  align-items: end;
+                `}
+              >
+                <div
+                  css={css`
+                    margin: auto;
+                    width: 33rem;
+                    position: absolute;
+                    z-index: 1;
+                  `}
+                >
+                  <Image src={mobileimage} objectFit="cover" />
+                </div>
+                <div
+                  css={css`
+                    width: 20rem;
+                    position: relative;
+                    border: 2px solid #404040;
+                    z-index: 10;
+                    display: flex;
+                    border-radius: 10px;
+                    top: -33px;
+                    background-color: #000;
+                  `}
+                >
+                  <div
+                    css={css`
+                      margin: auto;
+                      width: 3.5rem;
+                      position: relative;
+                      z-index: 10;
+                      margin: 8px 12px;
+                    `}
+                  >
+                    <Image src={strangerthings} />
+                  </div>
+                  <div>
+                    <h3
+                      css={css`
+                        color: white;
+                      `}
+                    >
+                      Stranger Things
+                    </h3>
+                    <p
+                      css={css`
+                        color: #0071e3;
+                      `}
+                    >
+                      Downloading...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                css={css`
+                  flex: 1;
+                  display: flex;
+                `}
+              >
+                <div
+                  css={css`
+                    margin: auto;
+                    max-width: 33rem;
+                  `}
+                >
+                  <h2
+                    css={css`
+                      color: white;
+                      font-size: 3rem;
+                      margin: 0;
+                    `}
+                  >
+                    Download your shows to watch offline.
+                  </h2>
+                  <p
+                    css={css`
+                      color: white;
+                      font-size: 1.5rem;
+                      margin: 15px 0 0 0;
+                    `}
+                  >
+                    Save your favorites easily and always have something to
+                    watch.
+                  </p>
+                </div>
+              </div>
+            </Box>
+          </div>
           <div></div>
         </div>
       </div>
