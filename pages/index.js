@@ -139,7 +139,6 @@ const Home = () => {
         </div>
         <div
           css={css`
-            /* height: 40rem; */
             width: 100%;
             background-color: black;
           `}
@@ -148,22 +147,19 @@ const Home = () => {
             css={css`
               background-color: black;
               border-bottom: 0.5rem solid #222222;
-              height: 30rem;
-              width: 100%;
             `}
           >
             <Box
               sx={{
                 display: "flex",
-                p: 5,
-                width: "70%",
-                height: "100%",
+                maxWidth: "1100px",
                 margin: "auto",
+                padding: "25px 45px",
               }}
             >
               <div
                 css={css`
-                  flex: 1;
+                  flex: 0 1 auto;
                   display: flex;
                 `}
               >
@@ -196,25 +192,22 @@ const Home = () => {
               </div>
               <div
                 css={css`
-                  flex: 1;
-                  height: 100%;
-                  width: 100%;
+                  flex: 0 1 auto;
                   display: flex;
                 `}
               >
                 <div
                   css={css`
                     display: flex;
-                    width: 100%;
                     justify-content: center;
                     align-items: center;
+                    position: relative;
                   `}
                 >
                   <div
                     css={css`
                       margin: auto;
-                      width: 33rem;
-                      position: absolute;
+                      position: relative;
                       z-index: 10;
                     `}
                   >
@@ -223,11 +216,11 @@ const Home = () => {
                   <div
                     css={css`
                       background-color: white;
-                      position: relative;
-                      width: 25rem;
-                      height: 14rem;
+                      position: absolute;
+                      height: 54%;
                       z-index: 0;
-                      top: -13px;
+                      top: 75px;
+                      left: 65px;
                       display: flex;
                     `}
                   >
@@ -243,16 +236,14 @@ const Home = () => {
             css={css`
               background-color: black;
               border-bottom: 0.5rem solid #222222;
-              height: 30rem;
-              width: 100%;
             `}
           >
             <Box
               sx={{
                 display: "flex",
-                p: 5,
-                width: "70%",
-                height: "100%",
+                padding: "25px 45px",
+                maxWidth: "1100px",
+                // height: "100%",
                 margin: "auto",
               }}
             >
@@ -261,13 +252,13 @@ const Home = () => {
                   flex: 1;
                   display: flex;
                   justify-content: center;
-                  align-items: end;
+                  align-items: center;
                 `}
               >
                 <div
                   css={css`
                     margin: auto;
-                    width: 33rem;
+                    width: 25rem;
                     position: absolute;
                     z-index: 1;
                   `}
@@ -282,8 +273,9 @@ const Home = () => {
                     z-index: 10;
                     display: flex;
                     border-radius: 10px;
-                    top: -33px;
+                    top: -70px;
                     background-color: #000;
+                    align-self: end;
                   `}
                 >
                   <div
