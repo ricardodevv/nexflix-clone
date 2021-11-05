@@ -11,6 +11,8 @@ import strangerthings from "../src/pictures/boxshot.png";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import downloadIcon from "../src/pictures/download-icon.gif";
+import devices from "../src/pictures/devices.png";
 
 const Home = () => {
   return (
@@ -218,16 +220,25 @@ const Home = () => {
                   </div>
                   <div
                     css={css`
-                      background-color: white;
+                      background-color: black;
                       position: absolute;
-                      height: 54%;
+                      height: 100%;
                       z-index: 0;
-                      top: 75px;
-                      left: 65px;
+                      top: 18%;
                       display: flex;
+                      max-width: 75%;
+                      max-height: 60%;
                     `}
                   >
-                    <video autoPlay loop muted>
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      css={css`
+                        width: 100%;
+                        height: 100%;
+                      `}
+                    >
                       <source src="tvloop.mp4" type="video/mp4" />
                     </video>
                   </div>
@@ -288,12 +299,21 @@ const Home = () => {
                       margin: 8px 12px;
                     `}
                   >
-                    <Image src={strangerthings} />
+                    <Image src={strangerthings} objectFit="cover" />
                   </div>
-                  <div>
+                  <div
+                    css={css`
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      margin-right: 1.5rem;
+                    `}
+                  >
                     <h3
                       css={css`
                         color: white;
+                        margin: 0;
+                        font-size: 1.1rem;
                       `}
                     >
                       Stranger Things
@@ -301,10 +321,20 @@ const Home = () => {
                     <p
                       css={css`
                         color: #0071e3;
+                        margin: 0;
                       `}
                     >
                       Downloading...
                     </p>
+                  </div>
+                  <div
+                    css={css`
+                      width: 20%;
+                      align-self: center;
+                      margin: auto;
+                    `}
+                  >
+                    <Image src={downloadIcon} objectFit="cover" />
                   </div>
                 </div>
               </div>
@@ -344,7 +374,87 @@ const Home = () => {
               </div>
             </Box>
           </div>
-          <div></div>
+          <div
+            css={css`
+              padding: 40px 45px;
+            `}
+          >
+            <div
+              css={css`
+                display: flex;
+                max-width: 1100px;
+                margin: auto;
+              `}
+            >
+              <div
+                css={css`
+                  flex: 0 1 auto;
+                  width: 52%;
+                  display: flex;
+                  justify-content: center;
+                  flex-direction: column;
+                `}
+              >
+                <h2
+                  css={css`
+                    color: white;
+                    font-size: 3rem;
+                    margin: 0;
+                  `}
+                >
+                  Watch everywhere.
+                </h2>
+                <p
+                  css={css`
+                    color: white;
+                    font-size: 1.5rem;
+                    margin: 15px 0 0 0;
+                  `}
+                >
+                  Stream unlimited movies and TV shows on your phone, tablet,
+                  laptop, and TV without paying more.
+                </p>
+              </div>
+              <div
+                css={css`
+                  flex: 0 1 auto;
+                  width: 48%;
+                  height: 100%;
+                  position: relative;
+                `}
+              >
+                <div
+                  css={css`
+                    position: relative;
+                    z-index: 10;
+                  `}
+                >
+                  <Image src={devices} layout="responsive" />
+                </div>
+                <div
+                  css={css`
+                    position: absolute;
+                    width: 100%;
+                    height: 46%;
+                    top: 11%;
+                    z-index: 1;
+                  `}
+                >
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    css={css`
+                      width: 100%;
+                      height: 100%;
+                    `}
+                  >
+                    <source src="devices.mp4"></source>
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>
