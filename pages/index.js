@@ -147,6 +147,7 @@ const Home = () => {
             css={css`
               background-color: black;
               border-bottom: 0.5rem solid #222222;
+              padding: 40px 45px;
             `}
           >
             <Box
@@ -154,19 +155,20 @@ const Home = () => {
                 display: "flex",
                 maxWidth: "1100px",
                 margin: "auto",
-                padding: "25px 45px",
               }}
             >
               <div
                 css={css`
                   flex: 0 1 auto;
                   display: flex;
+                  padding: 0 3rem 0 0;
+                  align-items: center;
+                  width: 52%;
                 `}
               >
                 <div
                   css={css`
                     margin: auto;
-                    max-width: 30rem;
                   `}
                 >
                   <h2
@@ -181,7 +183,7 @@ const Home = () => {
                   <p
                     css={css`
                       color: white;
-                      font-size: 1.5rem;
+                      font-size: 1.7rem;
                       margin: 15px 0 0 0;
                     `}
                   >
@@ -194,6 +196,7 @@ const Home = () => {
                 css={css`
                   flex: 0 1 auto;
                   display: flex;
+                  width: 48%;
                 `}
               >
                 <div
@@ -236,14 +239,13 @@ const Home = () => {
             css={css`
               background-color: black;
               border-bottom: 0.5rem solid #222222;
+              padding: 40px 45px;
             `}
           >
             <Box
               sx={{
                 display: "flex",
-                padding: "25px 45px",
                 maxWidth: "1100px",
-                // height: "100%",
                 margin: "auto",
               }}
             >
@@ -253,13 +255,12 @@ const Home = () => {
                   display: flex;
                   justify-content: center;
                   align-items: center;
+                  position: relative;
+                  width: 48%;
                 `}
               >
                 <div
                   css={css`
-                    margin: auto;
-                    width: 25rem;
-                    position: absolute;
                     z-index: 1;
                   `}
                 >
@@ -268,12 +269,12 @@ const Home = () => {
                 <div
                   css={css`
                     width: 20rem;
-                    position: relative;
+                    position: absolute;
                     border: 2px solid #404040;
                     z-index: 10;
                     display: flex;
                     border-radius: 10px;
-                    top: -70px;
+                    bottom: 24px;
                     background-color: #000;
                     align-self: end;
                   `}
@@ -311,12 +312,13 @@ const Home = () => {
                 css={css`
                   flex: 1;
                   display: flex;
+                  padding: 0 0 0 3rem;
+                  width: 52%;
                 `}
               >
                 <div
                   css={css`
                     margin: auto;
-                    max-width: 33rem;
                   `}
                 >
                   <h2
