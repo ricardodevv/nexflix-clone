@@ -18,7 +18,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddIcon from "@mui/icons-material/Add";
 
 const Home = () => {
   return (
@@ -560,9 +560,49 @@ const Home = () => {
               >
                 Frequently Asked Questions
               </h2>
-              <Accordion>
+              <Accordion
+                sx={{
+                  backgroundColor: "#343434",
+                  color: "white",
+                  "& .MuiAccordionSummary-content.Mui-expanded": { margin: 0 },
+                }}
+              >
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
+                  expandIcon={
+                    <AddIcon sx={{ color: "white", fontSize: "3rem" }} />
+                  }
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <h3>What is Netflix?</h3>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <p>
+                    Netflix is a streaming service that offers a wide variety of
+                    award-winning TV shows, movies, anime, documentaries, and
+                    more on thousands of internet-connected devices.
+                  </p>
+                  <p>
+                    You can watch as much as you want, whenever you want without
+                    a single commercial – all for one low monthly price. There's
+                    always something new to discover and new TV shows and movies
+                    are added every week!
+                  </p>
+                </AccordionDetails>
+              </Accordion>
+              <Accordion
+                sx={{
+                  backgroundColor: "#343434",
+                  color: "white",
+                  "& .MuiPaper-root-MuiAccordion-root.Mui-expanded": {
+                    margin: 0,
+                  },
+                }}
+              >
+                <AccordionSummary
+                  expandIcon={
+                    <AddIcon sx={{ color: "white", fontSize: "3rem" }} />
+                  }
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
