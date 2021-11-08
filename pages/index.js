@@ -13,6 +13,12 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import downloadIcon from "../src/pictures/download-icon.gif";
 import devices from "../src/pictures/devices.png";
+import kids from "../src/pictures/kids.png";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Home = () => {
   return (
@@ -34,7 +40,12 @@ const Home = () => {
               border-bottom: 0.5rem solid #222222;
             `}
           >
-            <Image src={indexjpg} layout="fill" objectFit="cover"></Image>
+            <Image
+              src={indexjpg}
+              alt="series-background"
+              layout="fill"
+              objectFit="cover"
+            ></Image>
             <div
               css={css`
                 position: absolute;
@@ -53,9 +64,9 @@ const Home = () => {
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                height: 50%;
                 width: 40rem;
                 margin: auto;
+                padding-top: 5rem;
                 z-index: 4;
                 align-items: center;
                 justify-content: center;
@@ -64,7 +75,7 @@ const Home = () => {
               <h2
                 css={css`
                   color: white;
-                  font-size: 4rem;
+                  font-size: 3rem;
                   text-align: center;
                   margin: 0;
                   line-height: 1.1;
@@ -102,7 +113,7 @@ const Home = () => {
               >
                 <TextField
                   fullWidth
-                  label="Email"
+                  label="Email address"
                   variant="standard"
                   sx={{
                     background: "white",
@@ -125,15 +136,23 @@ const Home = () => {
                     fontSize: "1.5rem",
                     width: "15rem",
                     textTransform: "none",
-                    backgroundColor: "red",
+                    backgroundColor: "#e50914",
                     color: "white",
                     "&:hover": {
                       transition: "none",
-                      backgroundColor: "red",
+                      backgroundColor: "#e50914",
                     },
                   }}
                 >
-                  Get Started
+                  <p
+                    css={css`
+                      margin: 0;
+                      padding-right: 5px;
+                    `}
+                  >
+                    Get Started
+                  </p>
+                  <ArrowForwardIosIcon />
                 </Button>
               </Box>
             </div>
@@ -216,7 +235,7 @@ const Home = () => {
                       z-index: 10;
                     `}
                   >
-                    <Image src={tvimage} objectFit="cover" />
+                    <Image src={tvimage} alt="tv streaming" objectFit="cover" />
                   </div>
                   <div
                     css={css`
@@ -275,7 +294,11 @@ const Home = () => {
                     z-index: 1;
                   `}
                 >
-                  <Image src={mobileimage} objectFit="cover" />
+                  <Image
+                    src={mobileimage}
+                    alt="mobile streaming"
+                    objectFit="cover"
+                  />
                 </div>
                 <div
                   css={css`
@@ -299,7 +322,11 @@ const Home = () => {
                       margin: 8px 12px;
                     `}
                   >
-                    <Image src={strangerthings} objectFit="cover" />
+                    <Image
+                      src={strangerthings}
+                      alt="stranger things cover"
+                      objectFit="cover"
+                    />
                   </div>
                   <div
                     css={css`
@@ -334,7 +361,11 @@ const Home = () => {
                       margin: auto;
                     `}
                   >
-                    <Image src={downloadIcon} objectFit="cover" />
+                    <Image
+                      src={downloadIcon}
+                      alt="download gif"
+                      objectFit="cover"
+                    />
                   </div>
                 </div>
               </div>
@@ -376,10 +407,12 @@ const Home = () => {
           </div>
           <div
             css={css`
+              background-color: black;
+              border-bottom: 0.5rem solid #222222;
               padding: 40px 45px;
             `}
           >
-            <div
+            <Box
               css={css`
                 display: flex;
                 max-width: 1100px;
@@ -393,11 +426,11 @@ const Home = () => {
                   display: flex;
                   justify-content: center;
                   flex-direction: column;
+                  color: white;
                 `}
               >
                 <h2
                   css={css`
-                    color: white;
                     font-size: 3rem;
                     margin: 0;
                   `}
@@ -406,7 +439,6 @@ const Home = () => {
                 </h2>
                 <p
                   css={css`
-                    color: white;
                     font-size: 1.5rem;
                     margin: 15px 0 0 0;
                   `}
@@ -429,7 +461,11 @@ const Home = () => {
                     z-index: 10;
                   `}
                 >
-                  <Image src={devices} layout="responsive" />
+                  <Image
+                    src={devices}
+                    alt="various devices streaming"
+                    layout="responsive"
+                  />
                 </div>
                 <div
                   css={css`
@@ -453,7 +489,100 @@ const Home = () => {
                   </video>
                 </div>
               </div>
-            </div>
+            </Box>
+          </div>
+          <div
+            css={css`
+              background-color: black;
+              border-bottom: 0.5rem solid #222222;
+              padding: 40px 45px;
+            `}
+          >
+            <Box sx={{ display: "flex", maxWidth: "1100px", margin: "auto" }}>
+              <div
+                css={css`
+                  width: 48%;
+                  flex: 0 1 auto;
+                `}
+              >
+                <Image src={kids} alt="kids section" objectFit="cover" />
+              </div>
+              <div
+                css={css`
+                  flex: 0 1 auto;
+                  width: 52%;
+                  display: flex;
+                  justify-content: center;
+                  flex-direction: column;
+                  color: white;
+                `}
+              >
+                <h2
+                  css={css`
+                    font-size: 3rem;
+                    margin: 0;
+                  `}
+                >
+                  Create profiles for kids.
+                </h2>
+                <p
+                  css={css`
+                    font-size: 1.5rem;
+                    margin: 15px 0 0 0;
+                  `}
+                >
+                  Send kids on adventures with their favorite characters in a
+                  space made just for them—free with your membership.
+                </p>
+              </div>
+            </Box>
+          </div>
+          <div
+            css={css`
+              padding: 40px 45px;
+            `}
+          >
+            <Box
+              sx={{
+                maxWidth: "50rem",
+                margin: "auto",
+                display: "flex",
+                flexDirection: "column",
+                color: "white",
+                justifyContent: "center",
+              }}
+            >
+              <h2
+                css={css`
+                  font-size: 3rem;
+                  text-align: center;
+                `}
+              >
+                Frequently Asked Questions
+              </h2>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <h3>What is Netflix?</h3>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <p>
+                    Netflix is a streaming service that offers a wide variety of
+                    award-winning TV shows, movies, anime, documentaries, and
+                    more on thousands of internet-connected devices.
+                  </p>
+                  <p>
+                    You can watch as much as you want, whenever you want without
+                    a single commercial – all for one low monthly price. There's
+                    always something new to discover and new TV shows and movies
+                    are added every week!
+                  </p>
+                </AccordionDetails>
+              </Accordion>
+            </Box>
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ const Header = () => {
     >
       <div
         css={css`
-          width: 200px;
+          width: 10rem;
           padding: 1rem;
           margin: 1rem 2rem;
         `}
@@ -68,14 +68,14 @@ const Header = () => {
         <Button
           sx={{
             textTransform: "none",
-            backgroundColor: "red",
+            backgroundColor: "#e50914",
             color: "white",
             fontSize: 17,
             ml: 3,
             p: "2px 15px",
             "&:hover": {
               transition: "none",
-              backgroundColor: "red",
+              backgroundColor: "#e50914",
             },
           }}
         >
