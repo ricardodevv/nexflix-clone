@@ -21,6 +21,36 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AddIcon from "@mui/icons-material/Add";
 import { styled } from "@mui/material/styles";
 
+const TextFieldStyled = styled((props) => <TextField fullWidth {...props} />)(
+  (theme) => ({
+    background: "white",
+    justifyContent: "center",
+    padding: "0.9rem",
+    "& .MuiInputBase-root:before, .MuiInputBase-root:after, .MuiInput-root:hover:not(.Mui-disabled):before":
+      {
+        border: "none",
+      },
+    "& .MuiInputBase-root": {
+      marginTop: "0px",
+    },
+    "& .MuiInputLabel-root": {
+      margin: "0px 12px",
+    },
+  })
+);
+
+const GetStartedButton = styled(Button)(({ theme }) => ({
+  fontSize: "1.5rem",
+  width: "17rem",
+  textTransform: "none",
+  backgroundColor: "#e50914",
+  color: "white",
+  "&:hover": {
+    transition: "none",
+    backgroundColor: "#e50914",
+  },
+}));
+
 const AccordionStyled = styled((props) => <Accordion {...props} />)(
   ({ theme }) => ({
     backgroundColor: "#343434",
@@ -29,10 +59,6 @@ const AccordionStyled = styled((props) => <Accordion {...props} />)(
     "& .MuiAccordionSummary-root": {
       borderBottom: "1px solid black",
     },
-    // "& .MuiAccordionSummary-content.Mui-expanded, .MuiAccordionSummary-content":
-    //   {
-    //     margin: 0,
-    //   },
   })
 );
 
@@ -133,44 +159,13 @@ const Home = () => {
                 membership.
               </p>
               <Box
-                css={css`
-                  width: 100%;
-                  display: flex;
-                `}
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                }}
               >
-                <TextField
-                  fullWidth
-                  label="Email address"
-                  variant="standard"
-                  sx={{
-                    background: "white",
-                    justifyContent: "center",
-                    padding: "0.9rem",
-                    "& .MuiInputBase-root:before, .MuiInputBase-root:after, .MuiInput-root:hover:not(.Mui-disabled):before":
-                      {
-                        border: "none",
-                      },
-                    "& .MuiInputBase-root": {
-                      marginTop: "0px",
-                    },
-                    "& .MuiInputLabel-root": {
-                      margin: "0px 12px",
-                    },
-                  }}
-                />
-                <Button
-                  sx={{
-                    fontSize: "1.5rem",
-                    width: "15rem",
-                    textTransform: "none",
-                    backgroundColor: "#e50914",
-                    color: "white",
-                    "&:hover": {
-                      transition: "none",
-                      backgroundColor: "#e50914",
-                    },
-                  }}
-                >
+                <TextFieldStyled label="Email address" variant="standard" />
+                <GetStartedButton>
                   <p
                     css={css`
                       margin: 0;
@@ -180,7 +175,7 @@ const Home = () => {
                     Get Started
                   </p>
                   <ArrowForwardIosIcon />
-                </Button>
+                </GetStartedButton>
               </Box>
             </div>
           </div>
@@ -566,6 +561,8 @@ const Home = () => {
           </div>
           <div
             css={css`
+              background-color: black;
+              border-bottom: 0.5rem solid #222222;
               padding: 40px 45px;
             `}
           >
@@ -699,10 +696,104 @@ const Home = () => {
                   </p>
                 </AccordionDetails>
               </AccordionStyled>
+              <h4
+                css={css`
+                  margin-top: 3rem;
+                  text-align: center;
+                `}
+              >
+                Ready to watch? Enter your email to create or restart your
+                membership.
+              </h4>
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                }}
+              >
+                <TextFieldStyled label="Email address" variant="standard" />
+                <GetStartedButton>
+                  <p
+                    css={css`
+                      margin: 0;
+                      padding-right: 5px;
+                    `}
+                  >
+                    Get Started
+                  </p>
+                  <ArrowForwardIosIcon />
+                </GetStartedButton>
+              </Box>
             </Box>
           </div>
         </div>
       </div>
+      <footer
+        css={css`
+          background-color: black;
+        `}
+      >
+        <Box
+          sx={{
+            maxWidth: "1100px",
+            color: "#757575",
+            margin: "auto",
+            padding: "4rem",
+            "& li": {
+              listStyle: "none",
+            },
+          }}
+        >
+          <p
+            css={css`
+              margin: 0;
+            `}
+          >
+            Questions? Call +1 (408) 469-4467 (USA)
+          </p>
+          <div
+            css={css`
+              font-size: 0.8rem;
+              display: flex;
+              justify-content: space-between;
+              & li {
+                margin: 1rem 0;
+                cursor: pointer;
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+              & ul {
+                padding: 0;
+              }
+            `}
+          >
+            <ul>
+              <li>FAQ</li>
+              <li>Investor Relations</li>
+              <li>Privacy</li>
+              <li>Speed Test</li>
+            </ul>
+            <ul>
+              <li>Help Center</li>
+              <li>Jobs</li>
+              <li>Cookie Preferences</li>
+              <li>Legal Notices</li>
+            </ul>
+            <ul>
+              <li>Account</li>
+              <li>Ways to Watch</li>
+              <li>Corporate Information</li>
+              <li>Only on Netflix</li>
+            </ul>
+            <ul>
+              <li>Media Center</li>
+              <li>Terms of Use</li>
+              <li>Contact Us</li>
+            </ul>
+          </div>
+        </Box>
+      </footer>
     </Layout>
   );
 };
