@@ -565,6 +565,9 @@ const Home = () => {
                   backgroundColor: "#343434",
                   color: "white",
                   "& .MuiAccordionSummary-content.Mui-expanded": { margin: 0 },
+                  "& .MuiAccordion-root.Mui-expanded": {
+                    margin: 0,
+                  },
                 }}
               >
                 <AccordionSummary
