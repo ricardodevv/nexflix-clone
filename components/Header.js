@@ -6,10 +6,7 @@ import logo from "../src/pictures/logo.svg";
 import Image from "next/image";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import LanguageIcon from "@mui/icons-material/Language";
-import { styled } from "@mui/material/styles";
+import LanguageComponent from "./LanguageComponent";
 
 const Header = () => {
   const [lang, setLang] = useState("English");
@@ -17,21 +14,6 @@ const Header = () => {
   const handleChange = (event) => {
     setLang(event.target.value);
   };
-
-  const LanguageSelect = styled(Select)(({ theme }) => ({
-    fontSize: "1rem",
-    height: "2.3rem",
-    color: "white",
-    "& .MuiSvgIcon-root": {
-      color: "white",
-    },
-    "& .MuiSelect-select": {
-      padding: "0.4rem",
-    },
-    "& fieldset": {
-      border: "none",
-    },
-  }));
 
   return (
     <div
@@ -64,22 +46,11 @@ const Header = () => {
       >
         <div
           css={css`
-            border: 1px solid white;
             background-color: black;
             border-radius: 5px;
-            display: flex;
-            align-items: center;
           `}
         >
-          <LanguageIcon sx={{ color: "white", fontSize: "1rem" }} />
-          <LanguageSelect
-            value={lang}
-            onChange={handleChange}
-            inputProps={{ "aria-label": "language" }}
-          >
-            <MenuItem value="English">English</MenuItem>
-            <MenuItem value="Spanish">Spanish</MenuItem>
-          </LanguageSelect>
+          <LanguageComponent />
         </div>
         <Button
           sx={{

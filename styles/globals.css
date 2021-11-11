@@ -14,3 +14,13 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.MuiPaper-root .MuiList-root {
+  background-color: #6a6a6a;
+  color: white;
+  padding: 0;
+}
+
+.MuiList-root li {
+  padding: 0 15px;
+}

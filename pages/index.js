@@ -20,6 +20,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AddIcon from "@mui/icons-material/Add";
 import { styled } from "@mui/material/styles";
+import LanguageComponent from "../components/LanguageComponent";
 
 const TextFieldStyled = styled((props) => <TextField fullWidth {...props} />)(
   (theme) => ({
@@ -792,6 +793,7 @@ const Home = () => {
               <li>Contact Us</li>
             </ul>
           </div>
+          <LanguageComponent />
         </Box>
       </footer>
     </Layout>
