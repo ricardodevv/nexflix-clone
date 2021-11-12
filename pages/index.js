@@ -585,25 +585,8 @@ const Home = () => {
               >
                 Frequently Asked Questions
               </h2>
-<<<<<<< HEAD
-              <Accordion
-                sx={{
-                  backgroundColor: "#343434",
-                  color: "white",
-                  "& .MuiAccordionSummary-content.Mui-expanded": { margin: 0 },
-                  "& .MuiAccordion-root.Mui-expanded": {
-                    margin: 0,
-                  },
-                }}
-              >
-                <AccordionSummary
-                  expandIcon={
-                    <AddIcon sx={{ color: "white", fontSize: "3rem" }} />
-                  }
-=======
               <AccordionStyled disableGutters square>
                 <AccordionSummaryStyled
->>>>>>> b64940bb5f85b62c138cc82828767b59e9d1e644
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
@@ -810,7 +793,26 @@ const Home = () => {
               <li>Contact Us</li>
             </ul>
           </div>
-          <LanguageComponent />
+          <LanguageComponent
+            styles={{
+              border: "1px solid #80808061",
+              color: "gray",
+              "& #langIcon": {
+                margin: "0 0.5rem",
+              },
+              "& .MuiSvgIcon-root": {
+                color: "gray",
+              },
+              "& fieldset": {
+                border: "none",
+              },
+              "& div": {
+                display: "flex",
+                alignItems: "center",
+                padding: "0.5rem",
+              },
+            }}
+          />
         </Box>
       </footer>
     </Layout>

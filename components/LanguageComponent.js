@@ -4,25 +4,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 
-const LanguageSelect = styled((props) => <Select {...props} />)(
-  ({ theme }) => ({
-    height: "2.3rem",
-    color: "white",
-    border: "1px solid white",
-    "& .MuiSvgIcon-root": {
-      color: "white",
-    },
-    "& .MuiSelect-select": {
-      padding: "0.4rem",
-    },
-    "& fieldset": {
-      border: "none",
-    },
-    "& div": { display: "flex", alignItems: "center" },
-  })
-);
-
-const LanguageComponent = () => {
+const LanguageComponent = ({ styles }) => {
   const [lang, setLang] = useState("English");
 
   const handleChange = (event) => {
@@ -30,22 +12,23 @@ const LanguageComponent = () => {
   };
 
   return (
-    <LanguageSelect
+    <Select
       onChange={handleChange}
       inputProps={{ "aria-label": "language" }}
       defaultValue={lang}
       renderValue={(lang) => {
         return (
           <div>
-            <LanguageIcon sx={{ fontSize: "1em" }} />
+            <LanguageIcon id="langIcon" sx={{ fontSize: "1em" }} />
             {lang}
           </div>
         );
       }}
+      sx={styles}
     >
       <MenuItem value="English">English</MenuItem>
       <MenuItem value="Spanish">Spanish</MenuItem>
-    </LanguageSelect>
+    </Select>
   );
 };
 

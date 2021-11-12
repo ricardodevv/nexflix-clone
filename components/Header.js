@@ -50,7 +50,23 @@ const Header = () => {
             border-radius: 5px;
           `}
         >
-          <LanguageComponent />
+          <LanguageComponent
+            styles={{
+              height: "2.3rem",
+              color: "white",
+              border: "1px solid gray",
+              "& .MuiSvgIcon-root": {
+                color: "white",
+              },
+              "& .MuiSelect-select": {
+                padding: "0.4rem",
+              },
+              "& fieldset": {
+                border: "none",
+              },
+              "& div": { display: "flex", alignItems: "center" },
+            }}
+          />
         </div>
         <Button
           sx={{
