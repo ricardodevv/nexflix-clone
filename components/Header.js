@@ -1,13 +1,12 @@
 /* @jsxImportSource @emotion/react */
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 import { useState } from "react";
 import Link from "@mui/material/Link";
 import logo from "../src/pictures/logo.svg";
 import Image from "next/image";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+import LanguageComponent from "./LanguageComponent";
 
 const Header = () => {
   const [lang, setLang] = useState("English");
@@ -45,26 +44,14 @@ const Header = () => {
           mr: 4,
         }}
       >
-        <Select
-          value={lang}
-          onChange={handleChange}
-          inputProps={{ "aria-label": "language" }}
-          sx={{
-            bgcolor: "black",
-            height: "2.3rem",
-            color: "white",
-            border: "1px solid white",
-            "& .MuiSvgIcon-root": {
-              color: "white",
-            },
-            "& .MuiSelect-select": {
-              padding: 1,
-            },
-          }}
+        <div
+          css={css`
+            background-color: black;
+            border-radius: 5px;
+          `}
         >
-          <MenuItem value="English">English</MenuItem>
-          <MenuItem value="Spanish">Spanish</MenuItem>
-        </Select>
+          <LanguageComponent />
+        </div>
         <Button
           sx={{
             textTransform: "none",
