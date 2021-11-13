@@ -1,41 +1,35 @@
 /* @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useState } from "react";
 import Link from "@mui/material/Link";
 import logo from "../src/pictures/logo.svg";
 import Image from "next/image";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import LanguageComponent from "./LanguageComponent";
+import { styled } from "@mui/material/styles";
+
+const HeaderBox = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  position: "relative",
+  zIndex: 3,
+}));
+
+const Logo = styled("div")(({ theme }) => ({
+  width: "10rem",
+  padding: "1rem",
+  margin: "1rem 2rem",
+}));
 
 const Header = () => {
-  const [lang, setLang] = useState("English");
-
-  const handleChange = (event) => {
-    setLang(event.target.value);
-  };
-
   return (
-    <div
-      css={css`
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
-        z-index: 3;
-      `}
-    >
-      <div
-        css={css`
-          width: 10rem;
-          padding: 1rem;
-          margin: 1rem 2rem;
-        `}
-      >
+    <HeaderBox>
+      <Logo>
         <Link href="/">
-          <Image src={logo} objectFit="fill" />
+          <Image src={logo} objectFit="fill" alt="Home" />
         </Link>
-      </div>
+      </Logo>
       <Box
         sx={{
           display: "flex",
@@ -85,7 +79,7 @@ const Header = () => {
           Sign in
         </Button>
       </Box>
-    </div>
+    </HeaderBox>
   );
 };
 

@@ -21,6 +21,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AddIcon from "@mui/icons-material/Add";
 import { styled } from "@mui/material/styles";
 import LanguageComponent from "../components/LanguageComponent";
+import Link from "next/link";
 
 const TextFieldStyled = styled((props) => <TextField fullWidth {...props} />)(
   (theme) => ({
@@ -45,6 +46,7 @@ const GetStartedButton = styled(Button)(({ theme }) => ({
   width: "17rem",
   textTransform: "none",
   backgroundColor: "#e50914",
+  borderRadius: 0,
   color: "white",
   "&:hover": {
     transition: "none",
@@ -166,17 +168,19 @@ const Home = () => {
                 }}
               >
                 <TextFieldStyled label="Email address" variant="standard" />
-                <GetStartedButton>
-                  <p
-                    css={css`
-                      margin: 0;
-                      padding-right: 5px;
-                    `}
-                  >
-                    Get Started
-                  </p>
-                  <ArrowForwardIosIcon />
-                </GetStartedButton>
+                <Link href="/registration">
+                  <GetStartedButton>
+                    <p
+                      css={css`
+                        margin: 0;
+                        padding-right: 5px;
+                      `}
+                    >
+                      Get Started
+                    </p>
+                    <ArrowForwardIosIcon />
+                  </GetStartedButton>
+                </Link>
               </Box>
             </div>
           </div>
