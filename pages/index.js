@@ -168,7 +168,7 @@ const Home = () => {
                 }}
               >
                 <TextFieldStyled label="Email address" variant="standard" />
-                <Link href="/registration">
+                <Link href="/signup/registration">
                   <GetStartedButton>
                     <p
                       css={css`
