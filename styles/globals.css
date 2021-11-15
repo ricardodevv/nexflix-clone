@@ -15,6 +15,11 @@ a {
   box-sizing: border-box;
 }
 
+.MuiPaper-root {
+  box-shadow: none;
+  background: none;
+}
+
 .MuiPaper-root .MuiList-root {
   background-color: #6a6a6a;
   color: white;

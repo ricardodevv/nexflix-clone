@@ -1,8 +1,22 @@
 /* @jsxImportSource @emotion/react */
+import { useState } from "react";
 import { Box } from "@mui/system";
 import { css } from "@emotion/react";
+import LanguageIcon from "@mui/icons-material/Language";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const FooterSignUp = () => {
+  const [lang, setLang] = useState("English");
+  const [showMenuItems, setShowMenuItems] = useState(false);
+
+  const handleChangeLang = (event) => {
+    setLang(event.target.value);
+  };
+
+  const handleChangeShowMenuitems = (event) => {
+    setShowMenuItems(!showMenuItems);
+  };
+
   return (
     <div
       css={css`
@@ -62,6 +76,45 @@ const FooterSignUp = () => {
           <ul>
             <li>Privacy</li>
           </ul>
+        </div>
+        <div>
+          <div
+            css={css`
+              border: 1px solid black;
+              width: min-content;
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+            `}
+            onClick={(event) => handleChangeShowMenuitems(event)}
+          >
+            <LanguageIcon />
+            <p>{lang}</p>
+            <ArrowDropDownIcon />
+          </div>
+          {showMenuItems !== false ? (
+            <div
+              id="MenuItems"
+              css={css`
+                width: min-content;
+                border: 1px gray solid;
+
+                ul {
+                  padding: 0;
+                }
+
+                li {
+                  list-style: none;
+                  padding: 0 0.5rem;
+                }
+              `}
+            >
+              <ul>
+                <li>English</li>
+                <li>Spanish</li>
+              </ul>
+            </div>
+          ) : null}
         </div>
       </Box>
     </div>
