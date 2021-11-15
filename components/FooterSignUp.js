@@ -1,5 +1,5 @@
 /* @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 import { css } from "@emotion/react";
 import LanguageIcon from "@mui/icons-material/Language";
@@ -9,8 +9,21 @@ const FooterSignUp = () => {
   const [lang, setLang] = useState("English");
   const [showMenuItems, setShowMenuItems] = useState(false);
 
+  const detectClickOnPage = () => {
+    if (showMenuItems === true) {
+      setShowMenuItems(!showMenuItems);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", detectClickOnPage);
+    return () => document.removeEventListener("click", detectClickOnPage);
+  });
+
   const handleChangeLang = (event) => {
-    setLang(event.target.value);
+    console.log(event);
+    setLang(event.target.innerText);
+    setShowMenuItems(!showMenuItems);
   };
 
   const handleChangeShowMenuitems = (event) => {
@@ -21,13 +34,14 @@ const FooterSignUp = () => {
     <div
       css={css`
         background-color: #93939317;
+        color: gray;
+        padding: 0 0 1rem 0;
       `}
     >
       <Box sx={{ margin: "auto 5rem" }}>
         <div
           css={css`
             padding: 2rem 0 1rem 0;
-            color: gray;
           `}
         >
           Questions? Call{" "}
@@ -80,16 +94,27 @@ const FooterSignUp = () => {
         <div>
           <div
             css={css`
-              border: 1px solid black;
+              border: 1px solid #00000036;
+              border-radius: 3px;
               width: min-content;
               display: flex;
               align-items: center;
               cursor: pointer;
+              padding: 0 0.5rem;
+              position: relative;
             `}
             onClick={(event) => handleChangeShowMenuitems(event)}
           >
             <LanguageIcon />
-            <p>{lang}</p>
+            <p
+              css={css`
+                padding: 0 0.5rem;
+                margin: 0.8rem 0.2rem;
+                width: 3.5rem;
+              `}
+            >
+              {lang}
+            </p>
             <ArrowDropDownIcon />
           </div>
           {showMenuItems !== false ? (
@@ -98,20 +123,29 @@ const FooterSignUp = () => {
               css={css`
                 width: min-content;
                 border: 1px gray solid;
+                position: absolute;
+                background-color: white;
+                margin: -5.7rem 0;
 
                 ul {
                   padding: 0;
+                  margin: 0;
                 }
 
                 li {
                   list-style: none;
-                  padding: 0 0.5rem;
+                  padding: 0 35.5px;
+                  :hover {
+                    background-color: #0073f7;
+                    color: white;
+                    cursor: pointer;
+                  }
                 }
               `}
             >
               <ul>
-                <li>English</li>
-                <li>Spanish</li>
+                <li onClick={(event) => handleChangeLang(event)}>English</li>
+                <li onClick={(event) => handleChangeLang(event)}>Spanish</li>
               </ul>
             </div>
           ) : null}
