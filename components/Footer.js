@@ -1,3 +1,4 @@
+/* @jsxImportSource @emotion/react */
 import { Box } from "@mui/system";
 import { css } from "@emotion/react";
 import LanguageComponent from "./LanguageComponent";
