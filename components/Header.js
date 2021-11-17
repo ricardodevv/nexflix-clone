@@ -1,6 +1,6 @@
 /* @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import Link from "@mui/material/Link";
+import Link from "next/link";
 import logo from "../src/pictures/logo.svg";
 import Image from "next/image";
 import Button from "@mui/material/Button";

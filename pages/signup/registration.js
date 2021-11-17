@@ -5,6 +5,7 @@ import Image from "next/image";
 import Box from "@mui/material/Box";
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
+import Link from "next/link";
 
 const registration = () => {
   return (
@@ -58,22 +59,24 @@ const registration = () => {
             Netflix is personalized for you. Create a password to watch on any
             device at any time.
           </p>
-          <Button
-            sx={{
-              backgroundColor: "#e50914",
-              color: "white",
-              p: 1.2,
-              mt: 3,
-              borderRadius: "2px",
-              textTransform: "none",
-              fontSize: "1rem",
-              "&:hover": {
+          <Link href="/signup/regform">
+            <Button
+              sx={{
                 backgroundColor: "#e50914",
-              },
-            }}
-          >
-            Next
-          </Button>
+                color: "white",
+                p: 1.2,
+                mt: 3,
+                borderRadius: "2px",
+                textTransform: "none",
+                fontSize: "1rem",
+                "&:hover": {
+                  backgroundColor: "#e50914",
+                },
+              }}
+            >
+              Next
+            </Button>
+          </Link>
         </Box>
       </div>
     </LayoutSignUp>
