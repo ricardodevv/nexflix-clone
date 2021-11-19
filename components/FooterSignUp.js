@@ -1,35 +1,9 @@
 /* @jsxImportSource @emotion/react */
-import { useState, useEffect } from "react";
 import { Box } from "@mui/system";
 import { css } from "@emotion/react";
-import LanguageIcon from "@mui/icons-material/Language";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import SelectLang from "./SelectLang";
 
 const FooterSignUp = () => {
-  const [lang, setLang] = useState("English");
-  const [showMenuItems, setShowMenuItems] = useState(false);
-
-  const detectClickOnPage = () => {
-    if (showMenuItems === true) {
-      setShowMenuItems(!showMenuItems);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", detectClickOnPage);
-    return () => document.removeEventListener("click", detectClickOnPage);
-  });
-
-  const handleChangeLang = (event) => {
-    console.log(event);
-    setLang(event.target.innerText);
-    setShowMenuItems(!showMenuItems);
-  };
-
-  const handleChangeShowMenuitems = (event) => {
-    setShowMenuItems(!showMenuItems);
-  };
-
   return (
     <div
       css={css`
@@ -91,65 +65,7 @@ const FooterSignUp = () => {
             <li>Privacy</li>
           </ul>
         </div>
-        <div>
-          <div
-            css={css`
-              border: 1px solid #00000036;
-              border-radius: 3px;
-              width: min-content;
-              display: flex;
-              align-items: center;
-              cursor: pointer;
-              padding: 0 0.5rem;
-              position: relative;
-            `}
-            onClick={(event) => handleChangeShowMenuitems(event)}
-          >
-            <LanguageIcon />
-            <p
-              css={css`
-                padding: 0 0.5rem;
-                margin: 0.8rem 0.2rem;
-                width: 3.5rem;
-              `}
-            >
-              {lang}
-            </p>
-            <ArrowDropDownIcon />
-          </div>
-          {showMenuItems !== false ? (
-            <div
-              id="MenuItems"
-              css={css`
-                width: min-content;
-                border: 1px gray solid;
-                position: absolute;
-                background-color: white;
-                margin: -5.7rem 0;
-
-                ul {
-                  padding: 0;
-                  margin: 0;
-                }
-
-                li {
-                  list-style: none;
-                  padding: 0 35.5px;
-                  :hover {
-                    background-color: #0073f7;
-                    color: white;
-                    cursor: pointer;
-                  }
-                }
-              `}
-            >
-              <ul>
-                <li onClick={(event) => handleChangeLang(event)}>English</li>
-                <li onClick={(event) => handleChangeLang(event)}>Spanish</li>
-              </ul>
-            </div>
-          ) : null}
-        </div>
+        <SelectLang />
       </Box>
     </div>
   );

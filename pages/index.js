@@ -1,7 +1,7 @@
 /*
  * @jsxImportSource @emotion/react
  */
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import indexjpg from "../src/pictures/index.jpg";
@@ -9,49 +9,16 @@ import tvimage from "../src/pictures/tv.png";
 import mobileimage from "../src/pictures/mobile.jpg";
 import strangerthings from "../src/pictures/boxshot.png";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import downloadIcon from "../src/pictures/download-icon.gif";
 import devices from "../src/pictures/devices.png";
 import kids from "../src/pictures/kids.png";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AddIcon from "@mui/icons-material/Add";
 import { styled } from "@mui/material/styles";
 import Link from "next/link";
-
-const TextFieldStyled = styled((props) => <TextField fullWidth {...props} />)(
-  (theme) => ({
-    background: "white",
-    justifyContent: "center",
-    padding: "0.9rem",
-    "& .MuiInputBase-root:before, .MuiInputBase-root:after, .MuiInput-root:hover:not(.Mui-disabled):before":
-      {
-        border: "none",
-      },
-    "& .MuiInputBase-root": {
-      marginTop: "0px",
-    },
-    "& .MuiInputLabel-root": {
-      margin: "0px 12px",
-    },
-  })
-);
-
-const GetStartedButton = styled(Button)(({ theme }) => ({
-  fontSize: "1.5rem",
-  width: "17rem",
-  textTransform: "none",
-  backgroundColor: "#e50914",
-  borderRadius: 0,
-  color: "white",
-  "&:hover": {
-    transition: "none",
-    backgroundColor: "#e50914",
-  },
-}));
+import GetStartedField from "../components/GetStartedField";
 
 const AccordionStyled = styled((props) => <Accordion {...props} />)(
   ({ theme }) => ({
@@ -160,27 +127,7 @@ const Home = () => {
                 Ready to watch? Enter your email to create or restart your
                 membership.
               </p>
-              <Box
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                }}
-              >
-                <TextFieldStyled label="Email address" variant="standard" />
-                <Link href="/signup/registration">
-                  <GetStartedButton>
-                    <p
-                      css={css`
-                        margin: 0;
-                        padding-right: 5px;
-                      `}
-                    >
-                      Get Started
-                    </p>
-                    <ArrowForwardIosIcon />
-                  </GetStartedButton>
-                </Link>
-              </Box>
+              <GetStartedField />
             </div>
           </div>
         </div>
@@ -709,25 +656,7 @@ const Home = () => {
                 Ready to watch? Enter your email to create or restart your
                 membership.
               </h4>
-              <Box
-                sx={{
-                  width: "100%",
-                  display: "flex",
-                }}
-              >
-                <TextFieldStyled label="Email address" variant="standard" />
-                <GetStartedButton>
-                  <p
-                    css={css`
-                      margin: 0;
-                      padding-right: 5px;
-                    `}
-                  >
-                    Get Started
-                  </p>
-                  <ArrowForwardIosIcon />
-                </GetStartedButton>
-              </Box>
+              <GetStartedField />
             </Box>
           </div>
         </div>

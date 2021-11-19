@@ -59,7 +59,7 @@ const registration = () => {
             Netflix is personalized for you. Create a password to watch on any
             device at any time.
           </p>
-          <Link href="/signup/regform">
+          <Link href="/signup/regform" passHref>
             <Button
               sx={{
                 backgroundColor: "#e50914",
