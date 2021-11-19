@@ -1,5 +1,5 @@
 /* @jsxImportSource @emotion/react */
-import Link from "@mui/material/Link";
+import Link from "next/link";
 import Image from "next/image";
 import logo from "../src/pictures/logo.svg";
 import { styled } from "@mui/material/styles";
@@ -17,6 +17,7 @@ const Logo = styled("div")(({ theme }) => ({
   width: "10.5rem",
   padding: "1rem 0",
   margin: "0.5rem 0 0 2rem",
+  cursor: "pointer",
 }));
 
 const SignIn = styled("div")(({ theme }) => ({
@@ -37,12 +38,12 @@ const HeaderSignUp = () => {
   return (
     <HeaderBox>
       <Logo>
-        <Link href="/">
+        <Link href="/" passHref>
           <Image src={logo} objectFit="fill" />
         </Link>
       </Logo>
       <SignIn>
-        <Link href="/login">
+        <Link href="/login" passHref>
           <div>Sign in</div>
         </Link>
       </SignIn>

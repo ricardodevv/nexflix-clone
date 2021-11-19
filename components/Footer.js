@@ -1,6 +1,51 @@
+/* @jsxImportSource @emotion/react */
 import { Box } from "@mui/system";
 import { css } from "@emotion/react";
-import LanguageComponent from "./LanguageComponent";
+import SelectLang from "./SelectLang";
+
+const SelectLangStyled = css`
+  #selectContainer {
+    border: 1px solid gray;
+    border-radius: 3px;
+    width: min-content;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    position: relative;
+    color: gray;
+    outline: white;
+  }
+  p {
+    margin: 1rem 0.5rem;
+    width: 3rem;
+  }
+
+  #MenuItems {
+    width: min-content;
+    border: 1px gray solid;
+    position: absolute;
+    background-color: white;
+    top: 229.4rem;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      background-color: black;
+    }
+
+    li {
+      list-style: none;
+      padding: 0 36.5px;
+    }
+
+    li:hover {
+      background-color: #0073f7;
+      color: white;
+      cursor: pointer;
+    }
+  }
+`;
 
 const Footer = () => {
   return (
@@ -68,26 +113,7 @@ const Footer = () => {
             <li>Contact Us</li>
           </ul>
         </div>
-        <LanguageComponent
-          styles={{
-            border: "1px solid #80808061",
-            color: "gray",
-            "& #langIcon": {
-              margin: "0 0.5rem",
-            },
-            "& .MuiSvgIcon-root": {
-              color: "gray",
-            },
-            "& fieldset": {
-              border: "none",
-            },
-            "& div": {
-              display: "flex",
-              alignItems: "center",
-              padding: "0.5rem",
-            },
-          }}
-        />
+        <SelectLang styles={SelectLangStyled} />
       </Box>
     </footer>
   );

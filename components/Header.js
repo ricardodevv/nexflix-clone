@@ -1,12 +1,55 @@
 /* @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import Link from "@mui/material/Link";
 import logo from "../src/pictures/logo.svg";
 import Image from "next/image";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import LanguageComponent from "./LanguageComponent";
-import { styled } from "@mui/material/styles";
+import styled from "@emotion/styled";
+import SelectLang from "./SelectLang";
+
+const SelectLangStyled = css`
+  #selectContainer {
+    border: 1px solid white;
+    border-radius: 3px;
+    width: min-content;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    position: relative;
+    color: white;
+  }
+  p {
+    padding: 0 0.5rem;
+    margin: 0.5rem 0.2rem;
+    width: 3.5rem;
+  }
+
+  #MenuItems {
+    width: min-content;
+    border: 1px gray solid;
+    position: absolute;
+    background-color: white;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      background-color: gray;
+      color: white;
+    }
+
+    li {
+      list-style: none;
+      padding: 0 35.5px;
+    }
+
+    li:hover {
+      background-color: #0073f7;
+      color: white;
+      cursor: pointer;
+    }
+  }
+`;
 
 const HeaderBox = styled("div")(({ theme }) => ({
   display: "flex",
@@ -26,9 +69,7 @@ const Header = () => {
   return (
     <HeaderBox>
       <Logo>
-        <Link href="/">
-          <Image src={logo} objectFit="fill" alt="Home" />
-        </Link>
+        <Image src={logo} objectFit="fill" alt="Home" />
       </Logo>
       <Box
         sx={{
@@ -44,23 +85,7 @@ const Header = () => {
             border-radius: 5px;
           `}
         >
-          <LanguageComponent
-            styles={{
-              height: "2.3rem",
-              color: "white",
-              border: "1px solid gray",
-              "& .MuiSvgIcon-root": {
-                color: "white",
-              },
-              "& .MuiSelect-select": {
-                padding: "0.4rem",
-              },
-              "& fieldset": {
-                border: "none",
-              },
-              "& div": { display: "flex", alignItems: "center" },
-            }}
-          />
+          <SelectLang styles={SelectLangStyled} />
         </div>
         <Button
           sx={{
