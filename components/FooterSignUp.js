@@ -3,6 +3,49 @@ import { Box } from "@mui/system";
 import { css } from "@emotion/react";
 import SelectLang from "./SelectLang";
 
+const SelectLangStyled = css`
+  #selectContainer {
+    border: 1px solid gray;
+    border-radius: 3px;
+    width: min-content;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    position: relative;
+    color: gray;
+    outline: white;
+  }
+  p {
+    margin: 1rem 0.5rem;
+    width: 3rem;
+  }
+
+  #MenuItems {
+    width: min-content;
+    border: 1px gray solid;
+    position: absolute;
+    background-color: white;
+    top: 53.8rem;
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      list-style: none;
+      padding: 0 36.5px;
+    }
+
+    li:hover {
+      background-color: #0073f7;
+      color: white;
+      cursor: pointer;
+    }
+  }
+`;
+
 const FooterSignUp = () => {
   return (
     <div
@@ -65,7 +108,7 @@ const FooterSignUp = () => {
             <li>Privacy</li>
           </ul>
         </div>
-        <SelectLang />
+        <SelectLang styles={SelectLangStyled} />
       </Box>
     </div>
   );

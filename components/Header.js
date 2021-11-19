@@ -68,7 +68,7 @@ const Logo = styled("div")(({ theme }) => ({
 const Header = () => {
   return (
     <HeaderBox>
-      <Logo>
+      <Logo id="logo">
         <Image src={logo} objectFit="fill" alt="Home" />
       </Logo>
       <Box

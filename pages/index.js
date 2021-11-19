@@ -1,6 +1,7 @@
 /*
  * @jsxImportSource @emotion/react
  */
+import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import Layout from "../components/Layout";
 import Image from "next/image";
@@ -16,7 +17,6 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AddIcon from "@mui/icons-material/Add";
-import { styled } from "@mui/material/styles";
 import Link from "next/link";
 import GetStartedField from "../components/GetStartedField";
 

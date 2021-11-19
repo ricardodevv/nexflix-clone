@@ -1,9 +1,9 @@
 /*
  * @jsxImportSource @emotion/react
  */
-import { useState, useEffect } from "react";
-import { styled } from "@mui/material/styles";
+import { useState, useEffect, useRef } from "react";
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
 import Link from "next/link";
@@ -14,16 +14,6 @@ const TextFieldStyled = styled((props) => <form {...props} />)((theme) => ({
   display: "flex",
   height: "4rem",
   width: "100%",
-  // "& .MuiInputBase-root:before, .MuiInputBase-root:after, .MuiInput-root:hover:not(.Mui-disabled):before":
-  //   {
-  //     border: "none",
-  //   },
-  // "& .MuiInputBase-root": {
-  //   marginTop: "0px",
-  // },
-  // "& .MuiInputLabel-root": {
-  //   margin: "0px 12px",
-  // },
 }));
 
 const GetStartedButton = styled(Button)(({ theme }) => ({
@@ -39,21 +29,46 @@ const GetStartedButton = styled(Button)(({ theme }) => ({
   },
 }));
 
+const Label = styled.label`
+  position: absolute;
+  top: 0rem;
+  width: 100%;
+  transition: 0.2s;
+  color: #525252;
+  ${(props) =>
+    props.focusEmail === true
+      ? "top: -1rem; transition: 0.2s; font-size: 0.8rem"
+      : null};
+`;
+
 const GetStartedField = () => {
   const [email, setEmail] = useState("");
-  const [labelState, setLabelState] = useState(false);
+  const [focusEmail, setFocusEmail] = useState(false);
+  const wrapperRef = useRef(null);
+
+  console.log(focusEmail);
 
   useEffect(() => {
-    document.addEventListener(
-      "click",
-      detectClickOnPage(setLabelState, labelState)
-    );
-    return () => document.removeEventListener("click", detectClickOnPage);
-  });
+    document.addEventListener("click", handleClickOutside, false);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, false);
+    };
+  }, []);
+
+  const handleClickOutside = (e) => {
+    if (e.target.id !== "inpuuut" && focusEmail === true) {
+      setFocusEmail(!focusEmail);
+    }
+  };
 
   const handleEmailChange = (e) => {
     e.preventDefault();
     setEmail(e.target.value);
+  };
+
+  const focusEmailInput = (e) => {
+    e.preventDefault();
+    focusEmail === false ? setFocusEmail(!focusEmail) : null;
   };
 
   return (
@@ -72,19 +87,24 @@ const GetStartedField = () => {
           }
         `}
       >
-        <label htmlFor="email" css={css``}></label>
+        <Label htmlFor="email" focusEmail={focusEmail}></Label>
         <input
           onChange={(e) => handleEmailChange(e)}
           value={email}
+          id="inpuuut"
           css={css`
             font-size: 1.25rem;
             outline: none;
             border: none;
             width: 100%;
-            padding: 0 0.5rem;
+            padding: 1.25rem 0.5rem;
             margin: 0;
             height: fit-content;
+            z-index: 1;
+            background-color: transparent;
           `}
+          onClick={(e) => focusEmailInput(e)}
+          ref={wrapperRef}
         />
       </div>
       <Link href={{ pathname: "/signup/registration", query: "" }}>
