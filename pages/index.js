@@ -1,7 +1,7 @@
 /*
  * @jsxImportSource @emotion/react
  */
-import { css, jsx } from "@emotion/react";
+import { css } from "@emotion/react";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import indexjpg from "../src/pictures/index.jpg";
