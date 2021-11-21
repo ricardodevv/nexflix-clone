@@ -4,18 +4,32 @@
 import { useState, useEffect, useRef } from "react";
 import { css } from "@emotion/react";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
-import Link from "next/link";
-import detectClickOnPage from "../utils";
 
-const TextFieldStyled = styled((props) => <form {...props} />)((theme) => ({
-  background: "white",
-  display: "flex",
-  height: "4rem",
-  width: "100%",
-}));
+const TextFieldStyled = styled.form`
+  background: white;
+  display: flex;
+  height: 4rem;
+  width: 100%;
+`;
+
+const InputDiv = styled.div`
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  label::before {
+    content: "Email address";
+    position: absolute;
+    padding: 0 0.5rem;
+    top: 22px;
+  }
+  ${(props) =>
+    props.error && props.touched ? "border-bottom: 2px solid yellow" : null}
+`;
 
 const GetStartedButton = styled((props) => <Button {...props}></Button>)(
   ({ theme }) => ({
@@ -39,28 +53,37 @@ const Label = styled.label`
   transition: 0.2s;
   color: #525252;
   ${(props) =>
-    props.focusEmail === true
+    props.focusEmail
       ? "top: -1rem; transition: 0.2s; font-size: 0.8rem"
       : null};
 `;
 
 const EmailInput = styled.input`
-  ${(props) => {}}
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 1.25rem 0.5rem;
+  margin-top: 5px;
+  height: fit-content;
+  z-index: 1;
+  background-color: transparent;
 `;
 
 const GetStartedField = () => {
   const [email, setEmail] = useState("");
   const [focusEmail, setFocusEmail] = useState(false);
   const wrapperRef = useRef(null);
+  const router = useRouter();
 
   const validate = (values) => {
     const errors = {};
     if (!values.email) {
-      errors.email = "Email required";
+      errors.email = "*Email required";
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "Invalid email address";
+      errors.email = "*Invalid email address";
     }
     return errors;
   };
@@ -70,9 +93,7 @@ const GetStartedField = () => {
       email: "",
     },
     validate,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit: (values) => router.push("/signup/registration"),
   });
 
   useEffect(() => {
@@ -84,9 +105,9 @@ const GetStartedField = () => {
 
   const handleClickOutside = (e) => {
     if (
-      e.target.id !== "inpuuut" &&
+      e.target.id !== "email" &&
       focusEmail === true &&
-      email.length === 0
+      formik.values.email.length === 0
     ) {
       setFocusEmail(!focusEmail);
     }
@@ -98,61 +119,53 @@ const GetStartedField = () => {
   };
 
   const focusEmailInput = (e) => {
-    e.preventDefault();
-    focusEmail === false ? setFocusEmail(!focusEmail) : null;
+    !focusEmail ? setFocusEmail(!focusEmail) : null;
   };
+  console.log(focusEmail);
 
   return (
-    <TextFieldStyled onSubmit={formik.handleSubmit}>
-      <div
-        css={css`
-          flex: 1;
-          position: relative;
-          display: flex;
-          align-items: center;
-          label::before {
-            content: "Email address";
-            position: absolute;
-            padding: 0 0.5rem;
-            top: 22px;
-          }
-        `}
-      >
-        <Label htmlFor="email" focusEmail={focusEmail}></Label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
+    <div
+      css={css`
+        width: 100%;
+      `}
+    >
+      <TextFieldStyled onSubmit={formik.handleSubmit}>
+        <InputDiv error={formik.errors.email} touched={formik.touched.email}>
+          <Label htmlFor="email" focusEmail={focusEmail}></Label>
+          <EmailInput
+            id="email"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            onClick={(e) => focusEmailInput(e)}
+            ref={wrapperRef}
+          />
+        </InputDiv>
+        <GetStartedButton type="submit">
+          <p
+            css={css`
+              margin: 0;
+              padding-right: 5px;
+            `}
+          >
+            Get Started
+          </p>
+          <ArrowForwardIosIcon />
+        </GetStartedButton>
+      </TextFieldStyled>
+
+      {formik.touched.email && formik.errors.email ? (
+        <div
           css={css`
-            font-size: 1rem;
-            outline: none;
-            border: none;
-            width: 100%;
-            padding: 1.25rem 0.5rem;
-            margin-top: 5px;
-            height: fit-content;
-            z-index: 1;
-            background-color: transparent;
-          `}
-          onClick={(e) => focusEmailInput(e)}
-          ref={wrapperRef}
-        />
-        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-      </div>
-      <GetStartedButton type="submit">
-        <p
-          css={css`
-            margin: 0;
-            padding-right: 5px;
+            color: yellow;
           `}
         >
-          Get Started
-        </p>
-        <ArrowForwardIosIcon />
-      </GetStartedButton>
-    </TextFieldStyled>
+          {formik.errors.email}
+        </div>
+      ) : null}
+    </div>
   );
 };
 
