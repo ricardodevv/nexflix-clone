@@ -8,27 +8,14 @@ import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
+import InputField from "./InputField";
 
 const TextFieldStyled = styled.form`
   background: white;
   display: flex;
   height: 4rem;
   width: 100%;
-`;
-
-const InputDiv = styled.div`
-  flex: 1;
   position: relative;
-  display: flex;
-  align-items: center;
-  label::before {
-    content: "Email address";
-    position: absolute;
-    padding: 0 0.5rem;
-    top: 22px;
-  }
-  ${(props) =>
-    props.error && props.touched ? "border-bottom: 2px solid yellow" : null}
 `;
 
 const GetStartedButton = styled((props) => <Button {...props}></Button>)(
@@ -46,33 +33,9 @@ const GetStartedButton = styled((props) => <Button {...props}></Button>)(
   })
 );
 
-const Label = styled.label`
-  position: absolute;
-  top: 0rem;
-  width: 100%;
-  transition: 0.2s;
-  color: #525252;
-  ${(props) =>
-    props.focusEmail
-      ? "top: -1rem; transition: 0.2s; font-size: 0.8rem"
-      : null};
-`;
-
-const EmailInput = styled.input`
-  font-size: 1rem;
-  outline: none;
-  border: none;
-  width: 100%;
-  padding: 1.25rem 0.5rem;
-  margin-top: 5px;
-  height: fit-content;
-  z-index: 1;
-  background-color: transparent;
-`;
-
 const GetStartedField = () => {
-  const [email, setEmail] = useState("");
   const [focusEmail, setFocusEmail] = useState(false);
+  const [showError, setShowError] = useState(false);
   const wrapperRef = useRef(null);
   const router = useRouter();
 
@@ -93,7 +56,11 @@ const GetStartedField = () => {
       email: "",
     },
     validate,
-    onSubmit: (values) => router.push("/signup/registration"),
+    onSubmit: (values) =>
+      router.push({
+        pathname: "/signup/registration",
+        query: { email: formik.values.email },
+      }),
   });
 
   useEffect(() => {
@@ -113,11 +80,6 @@ const GetStartedField = () => {
     }
   };
 
-  const handleEmailChange = (e) => {
-    e.preventDefault();
-    setEmail(e.target.value);
-  };
-
   const focusEmailInput = (e) => {
     !focusEmail ? setFocusEmail(!focusEmail) : null;
   };
@@ -130,20 +92,21 @@ const GetStartedField = () => {
       `}
     >
       <TextFieldStyled onSubmit={formik.handleSubmit}>
-        <InputDiv error={formik.errors.email} touched={formik.touched.email}>
-          <Label htmlFor="email" focusEmail={focusEmail}></Label>
-          <EmailInput
-            id="email"
-            name="email"
-            type="email"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-            onClick={(e) => focusEmailInput(e)}
-            ref={wrapperRef}
-          />
-        </InputDiv>
-        <GetStartedButton type="submit">
+        <InputField
+          showError={showError}
+          error={formik.errors.email}
+          touched={formik.touched.email}
+          focusEmail={focusEmail}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
+          onClick={(e) => focusEmailInput(e)}
+          refe={wrapperRef}
+        />
+        <GetStartedButton
+          type="submit"
+          onClick={() => (!showError ? setShowError(!showError) : null)}
+        >
           <p
             css={css`
               margin: 0;
@@ -156,10 +119,11 @@ const GetStartedField = () => {
         </GetStartedButton>
       </TextFieldStyled>
 
-      {formik.touched.email && formik.errors.email ? (
+      {formik.touched.email && formik.errors.email && showError ? (
         <div
           css={css`
             color: yellow;
+            position: absolute;
           `}
         >
           {formik.errors.email}

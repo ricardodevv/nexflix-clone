@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import logo from "../src/pictures/logo.svg";
 import { styled } from "@mui/material/styles";
+import { css } from "@emotion/react";
 
 const HeaderBox = styled("div")(({ theme }) => ({
   display: "flex",
@@ -44,7 +45,16 @@ const HeaderSignUp = () => {
       </Logo>
       <SignIn>
         <Link href="/login" passHref>
-          <div>Sign in</div>
+          <div
+            css={css`
+              cursor: pointer;
+              :hover {
+                text-decoration: underline;
+              }
+            `}
+          >
+            <b>Sign in</b>
+          </div>
         </Link>
       </SignIn>
     </HeaderBox>
