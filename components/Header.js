@@ -9,7 +9,7 @@ import SelectLang from "./SelectLang";
 
 const SelectLangStyled = css`
   #selectContainer {
-    border: 1px solid white;
+    border: 1px solid #aaa;
     border-radius: 3px;
     width: min-content;
     display: flex;
@@ -19,10 +19,15 @@ const SelectLangStyled = css`
     position: relative;
     color: white;
   }
+
+  #langIcon {
+    font-size: 1rem;
+  }
+
   p {
-    padding: 0 0.5rem;
-    margin: 0.5rem 0.2rem;
-    width: 3.5rem;
+    padding: 0 0.2rem;
+    margin: 0.45rem 0rem;
+    width: 3.3rem;
   }
 
   #MenuItems {
@@ -40,7 +45,7 @@ const SelectLangStyled = css`
 
     li {
       list-style: none;
-      padding: 0 35.5px;
+      padding: 0 26.5px;
     }
 
     li:hover {

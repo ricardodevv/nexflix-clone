@@ -86,7 +86,7 @@ const Home = () => {
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                width: 40rem;
+                width: 45rem;
                 margin: auto;
                 padding-top: 5rem;
                 z-index: 4;
@@ -97,7 +97,7 @@ const Home = () => {
               <h2
                 css={css`
                   color: white;
-                  font-size: 3rem;
+                  font-size: 4rem;
                   text-align: center;
                   margin: 0;
                   line-height: 1.1;

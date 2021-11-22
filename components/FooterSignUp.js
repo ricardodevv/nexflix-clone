@@ -4,6 +4,8 @@ import { css } from "@emotion/react";
 import SelectLang from "./SelectLang";
 
 const SelectLangStyled = css`
+  position: relative;
+
   #selectContainer {
     border: 1px solid gray;
     border-radius: 3px;
@@ -26,7 +28,7 @@ const SelectLangStyled = css`
     border: 1px gray solid;
     position: absolute;
     background-color: white;
-    top: 53.8rem;
+    top: -2.7rem;
 
     ul {
       padding: 0;
@@ -52,7 +54,6 @@ const FooterSignUp = () => {
       css={css`
         background-color: #93939317;
         color: gray;
-        padding: 0 0 1rem 0;
       `}
     >
       <Box sx={{ margin: "auto 5rem" }}>

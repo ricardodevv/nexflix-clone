@@ -93,6 +93,10 @@ const GetStartedField = () => {
     >
       <TextFieldStyled onSubmit={formik.handleSubmit}>
         <InputField
+          htmlFor="email"
+          id="email"
+          name="email"
+          type="email"
           showError={showError}
           error={formik.errors.email}
           touched={formik.touched.email}

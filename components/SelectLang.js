@@ -1,6 +1,5 @@
 /* @jsxImportSource @emotion/react */
 import { useState, useEffect } from "react";
-import { css } from "@emotion/react";
 import LanguageIcon from "@mui/icons-material/Language";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Box } from "@mui/system";
@@ -36,7 +35,7 @@ const SelectLang = ({ styles }) => {
         id="selectContainer"
         onClick={(event) => handleChangeShowMenuitems(event)}
       >
-        <LanguageIcon />
+        <LanguageIcon id="langIcon" />
         <p>{lang}</p>
         <ArrowDropDownIcon />
       </div>
@@ -44,7 +43,7 @@ const SelectLang = ({ styles }) => {
         <div id="MenuItems">
           <ul>
             <li onClick={(event) => handleChangeLang(event)}>English</li>
-            <li onClick={(event) => handleChangeLang(event)}>Spanish</li>
+            <li onClick={(event) => handleChangeLang(event)}>Español</li>
           </ul>
         </div>
       ) : null}

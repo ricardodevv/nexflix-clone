@@ -23,13 +23,14 @@ const Label = styled.label`
   width: 100%;
   transition: 0.2s;
   color: #525252;
+  z-index: 2;
   ${(props) =>
     props.focusEmail
       ? "top: -1.1rem; transition: 0.2s; font-size: 0.8rem"
       : null};
 `;
 
-const EmailInput = styled.input`
+const Input = styled.input`
   font-size: 1rem;
   outline: none;
   border: none;
@@ -40,23 +41,33 @@ const EmailInput = styled.input`
   background-color: transparent;
 `;
 
-const InputField = (props) => {
+const InputField = ({
+  showError,
+  error,
+  touched,
+  htmlFor,
+  focusEmail,
+  id,
+  name,
+  type,
+  onChange,
+  onBlur,
+  value,
+  onClick,
+  refe,
+}) => {
   return (
-    <InputDiv
-      showError={props.showError}
-      error={props.error}
-      touched={props.touched}
-    >
-      <Label htmlFor="email" focusEmail={props.focusEmail}></Label>
-      <EmailInput
-        id="email"
-        name="email"
-        type="email"
-        onChange={props.onChange}
-        onBlur={props.handleBlur}
-        value={props.values}
-        onClick={props.onClick}
-        ref={props.refe}
+    <InputDiv showError={showError} error={error} touched={touched}>
+      <Label htmlFor={htmlFor} focusEmail={focusEmail}></Label>
+      <Input
+        id={id}
+        name={name}
+        type={type}
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+        onClick={onClick}
+        ref={refe}
       />
     </InputDiv>
   );
