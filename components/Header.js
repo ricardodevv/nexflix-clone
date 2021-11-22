@@ -65,7 +65,7 @@ const HeaderBox = styled("div")(({ theme }) => ({
 }));
 
 const Logo = styled("div")(({ theme }) => ({
-  width: "10rem",
+  width: "12.5rem",
   padding: "1rem",
   margin: "1rem 2rem",
 }));

@@ -6,8 +6,12 @@ import Box from "@mui/material/Box";
 import { css } from "@emotion/react";
 import { Button } from "@mui/material";
 import Link from "next/link";
+import { useStateValue } from "../../components/StateProvider";
 
 const registration = () => {
+  const [store, dispatch] = useStateValue();
+  console.log(store);
+
   return (
     <LayoutSignUp>
       <div

@@ -9,18 +9,20 @@ import styled from "@emotion/styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
 import InputField from "./InputField";
+import { setEmail } from "./Reducer";
+import { useStateValue } from "./StateProvider";
 
 const TextFieldStyled = styled.form`
   background: white;
   display: flex;
-  height: 4rem;
+  height: 4.25rem;
   width: 100%;
   position: relative;
 `;
 
 const GetStartedButton = styled((props) => <Button {...props}></Button>)(
   ({ theme }) => ({
-    fontSize: "1.5rem",
+    fontSize: "1.8rem",
     padding: "0 1rem",
     textTransform: "none",
     backgroundColor: "#e50914",
@@ -38,6 +40,7 @@ const GetStartedField = () => {
   const [showError, setShowError] = useState(false);
   const wrapperRef = useRef(null);
   const router = useRouter();
+  const [store, dispatch] = useStateValue();
 
   const validate = (values) => {
     const errors = {};
@@ -85,6 +88,11 @@ const GetStartedField = () => {
   };
   console.log(focusEmail);
 
+  const handleGetStartedButton = (e) => {
+    dispatch(setEmail(formik.values.email));
+    !showError ? setShowError(!showError) : null;
+  };
+
   return (
     <div
       css={css`
@@ -109,7 +117,7 @@ const GetStartedField = () => {
         />
         <GetStartedButton
           type="submit"
-          onClick={() => (!showError ? setShowError(!showError) : null)}
+          onClick={(e) => handleGetStartedButton(e)}
         >
           <p
             css={css`

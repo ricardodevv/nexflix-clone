@@ -22,7 +22,7 @@ const Label = styled.label`
   top: 0rem;
   width: 100%;
   transition: 0.2s;
-  color: #525252;
+  color: #525252c7;
   z-index: 2;
   ${(props) =>
     props.focusEmail

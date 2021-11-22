@@ -17,26 +17,23 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AddIcon from "@mui/icons-material/Add";
-import Link from "next/link";
 import GetStartedField from "../components/GetStartedField";
 
-const AccordionStyled = styled((props) => <Accordion {...props} />)(
-  ({ theme }) => ({
-    backgroundColor: "#343434",
-    color: "white",
-    margin: "5px 0",
-    "& .MuiAccordionSummary-root": {
-      borderBottom: "1px solid black",
-    },
-  })
-);
+const AccordionStyled = styled((props) => <Accordion {...props} />)(() => ({
+  backgroundColor: "#343434",
+  color: "white",
+  margin: "5px 0",
+  "& .MuiAccordionSummary-root": {
+    borderBottom: "1px solid black",
+  },
+}));
 
 const AccordionSummaryStyled = styled((props) => (
   <AccordionSummary
     expandIcon={<AddIcon sx={{ color: "white", fontSize: "3rem" }} />}
     {...props}
   />
-))(({ theme }) => ({
+))(() => ({
   "& .MuiAccordionSummary-content.Mui-expanded, .MuiAccordionSummary-content": {
     margin: 0,
   },
@@ -45,11 +42,11 @@ const AccordionSummaryStyled = styled((props) => (
 const Home = () => {
   return (
     <Layout pageTitle="Nextflix latam">
-      <div css={css``}>
+      <div>
         <div
           css={css`
             position: relative;
-            height: 36.2rem;
+            height: 40rem;
           `}
         >
           <div
@@ -57,7 +54,7 @@ const Home = () => {
               position: relative;
               top: -140px;
               width: 100%;
-              height: 45rem;
+              height: 50rem;
               display: flex;
               border-bottom: 0.5rem solid #222222;
             `}
