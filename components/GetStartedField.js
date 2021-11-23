@@ -59,11 +59,7 @@ const GetStartedField = () => {
       email: "",
     },
     validate,
-    onSubmit: (values) =>
-      router.push({
-        pathname: "/signup/registration",
-        query: { email: formik.values.email },
-      }),
+    onSubmit: (values) => router.push("/signup/registration"),
   });
 
   useEffect(() => {
@@ -86,7 +82,6 @@ const GetStartedField = () => {
   const focusEmailInput = (e) => {
     !focusEmail ? setFocusEmail(!focusEmail) : null;
   };
-  console.log(focusEmail);
 
   const handleGetStartedButton = (e) => {
     dispatch(setEmail(formik.values.email));

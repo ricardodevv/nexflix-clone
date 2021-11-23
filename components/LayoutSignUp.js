@@ -5,7 +5,13 @@ import { css } from "@emotion/react";
 
 const LayoutSignUp = ({ children }) => {
   return (
-    <div>
+    <div
+      css={css`
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      `}
+    >
       <HeaderSignUp />
       <div
         css={css`

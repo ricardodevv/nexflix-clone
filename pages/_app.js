@@ -6,7 +6,7 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }) {
   return (
     <StateProvider reducer={reducer} store={store}>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </StateProvider>
   );
 }

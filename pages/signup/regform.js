@@ -5,11 +5,38 @@ import { css } from "@emotion/react";
 import Box from "@mui/material/Box";
 import { useFormik } from "formik";
 import LayoutSignUp from "../../components/LayoutSignUp";
+import { useStateValue } from "../../components/StateProvider";
+import styled from "@emotion/styled";
+
+const BoxStyled = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  margin: "2rem auto 6rem auto",
+  padding: "0 0 9rem 0",
+  maxWidth: "28rem",
+  color: "#424242",
+
+  "& p, h3": {
+    margin: "0rem",
+  },
+  "& h3": {
+    fontSize: "1.5rem",
+    lineHeight: "1.7rem",
+    marginBottom: "0.5rem",
+  },
+  "& #p-text": {
+    fontSize: "1.15rem",
+    lineHeight: "1.3rem",
+  },
+}));
 
 const Regform = () => {
+  const [store, dispatch] = useStateValue();
+  console.log(store);
+
   const formik = useFormik({
     initialValues: {
-      email: "",
+      email: store.email.length !== 0 ? store.email : "",
       password: "",
     },
     onSubmit: (values) => {
@@ -19,12 +46,15 @@ const Regform = () => {
 
   return (
     <LayoutSignUp>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <BoxStyled>
         <p>
-          Step <b>2</b> of <b>3</b>
+          STEP <b>2</b> OF <b>3</b>
         </p>
         <h3>Create a password to start your membership</h3>
-        <p>Just a few more steps and you're done! We hate paperwork, too.</p>
+        <p id="p-text">
+          Just a few more steps and you're done!
+          <br /> We hate paperwork, too.
+        </p>
         <form
           onSubmit={formik.handleSubmit}
           css={css`
@@ -49,7 +79,7 @@ const Regform = () => {
             value={formik.values.password}
           />
         </form>
-      </Box>
+      </BoxStyled>
     </LayoutSignUp>
   );
 };

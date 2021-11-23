@@ -18,8 +18,9 @@ const SelectLangStyled = css`
     color: gray;
     outline: white;
   }
+
   p {
-    margin: 1rem 0.5rem;
+    margin: 0.8rem 0.5rem;
     width: 3rem;
   }
 
