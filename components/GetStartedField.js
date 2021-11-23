@@ -21,7 +21,7 @@ const TextFieldStyled = styled.form`
 `;
 
 const GetStartedButton = styled((props) => <Button {...props}></Button>)(
-  ({ theme }) => ({
+  () => ({
     fontSize: "1.8rem",
     padding: "0 1rem",
     textTransform: "none",
@@ -88,6 +88,45 @@ const GetStartedField = () => {
     !showError ? setShowError(!showError) : null;
   };
 
+  // GetStartedField style variables
+
+  const containerStyled = css`
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    label::before {
+      content: "Email address";
+      position: absolute;
+      padding: 0 0.5rem;
+      top: 22px;
+    }
+    ${showError && formik.errors.email && formik.touched.email
+      ? "border-bottom: 2px solid yellow"
+      : null}
+  `;
+
+  const labelStyled = css`
+    position: absolute;
+    top: 0rem;
+    width: 100%;
+    transition: 0.2s;
+    color: #525252c7;
+    z-index: 2;
+    ${focusEmail ? "top: -1.1rem; transition: 0.2s; font-size: 0.8rem" : null};
+  `;
+
+  const inputStyled = css`
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 1.4rem 0.5rem;
+    height: fit-content;
+    z-index: 1;
+    background-color: transparent;
+  `;
+
   return (
     <div
       css={css`
@@ -96,14 +135,14 @@ const GetStartedField = () => {
     >
       <TextFieldStyled onSubmit={formik.handleSubmit}>
         <InputField
+          containerStyled={containerStyled}
+          labelStyled={labelStyled}
+          inputStyled={inputStyled}
           htmlFor="email"
           id="email"
           name="email"
           type="email"
-          showError={showError}
-          error={formik.errors.email}
-          touched={formik.touched.email}
-          focusEmail={focusEmail}
+          focusElement={focusEmail}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
