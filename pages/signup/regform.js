@@ -7,6 +7,8 @@ import { useFormik } from "formik";
 import LayoutSignUp from "../../components/LayoutSignUp";
 import { useStateValue } from "../../components/StateProvider";
 import styled from "@emotion/styled";
+import * as Yup from "yup";
+import Formik from "../../components/Formik";
 
 const BoxStyled = styled(Box)(() => ({
   display: "flex",
@@ -38,7 +40,23 @@ const Regform = () => {
     initialValues: {
       email: store.email.length !== 0 ? store.email : "",
       password: "",
+      passwordConfirmation: "",
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("*Invalid email address")
+        .required("*Email required"),
+      password: Yup.string()
+        .required("*Password required")
+        .min(8, "*Password should be minimun 8 characters length")
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+        ),
+      passwordConfirmation: Yup.string()
+        .required()
+        .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    }),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
@@ -55,30 +73,49 @@ const Regform = () => {
           Just a few more steps and you're done!
           <br /> We hate paperwork, too.
         </p>
-        <form
-          onSubmit={formik.handleSubmit}
-          css={css`
-            display: flex;
-            flex-direction: column;
-          `}
+        <Formik
+          initialValues={{
+            email: store.email ? store.email : "",
+            password: "",
+            passwordConfirm: "",
+          }}
+          validationSchema={Yup.object({
+            email: Yup.string()
+              .email("*Please enter a correct email address")
+              .required("*Email required"),
+          })}
+          onSubmit={() => {
+            router.push("/signup/registration");
+          }}
         >
-          <label htmlFor="email">Email Address</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
-        </form>
+          {(formik) => (
+            <form
+              onSubmit={formik.handleSubmit}
+              css={css`
+                display: flex;
+                flex-direction: column;
+              `}
+            >
+              <label htmlFor="email">Email Address</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
+            </form>
+          )}
+        </Formik>
       </BoxStyled>
     </LayoutSignUp>
   );

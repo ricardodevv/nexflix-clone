@@ -3,14 +3,14 @@
  */
 import { useState, useEffect, useRef } from "react";
 import { css } from "@emotion/react";
-import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Button from "@mui/material/Button";
-import InputField from "./InputField";
 import { setEmail } from "./Reducer";
 import { useStateValue } from "./StateProvider";
+import Formik from "./Formik";
+import * as Yup from "yup";
 
 const TextFieldStyled = styled.form`
   background: white;
@@ -36,31 +36,11 @@ const GetStartedButton = styled((props) => <Button {...props}></Button>)(
 );
 
 const GetStartedField = () => {
-  const [focusEmail, setFocusEmail] = useState(false);
+  const [focusElement, setfocusElement] = useState(false);
   const [showError, setShowError] = useState(false);
   const wrapperRef = useRef(null);
   const router = useRouter();
   const [store, dispatch] = useStateValue();
-
-  const validate = (values) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = "*Email required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-    ) {
-      errors.email = "*Invalid email address";
-    }
-    return errors;
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    validate,
-    onSubmit: (values) => router.push("/signup/registration"),
-  });
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, false);
@@ -70,21 +50,22 @@ const GetStartedField = () => {
   });
 
   const handleClickOutside = (e) => {
+    let divv = document.getElementById("email");
     if (
       e.target.id !== "email" &&
-      focusEmail === true &&
-      formik.values.email.length === 0
+      focusElement === true &&
+      divv.value.length === 0
     ) {
-      setFocusEmail(!focusEmail);
+      setfocusElement(!focusElement);
     }
   };
 
-  const focusEmailInput = (e) => {
-    !focusEmail ? setFocusEmail(!focusEmail) : null;
+  const focusElementInput = (e) => {
+    !focusElement ? setfocusElement(!focusElement) : null;
   };
 
-  const handleGetStartedButton = (e) => {
-    dispatch(setEmail(formik.values.email));
+  const handleGetStartedButton = (e, formikValue) => {
+    dispatch(setEmail(formikValue));
     !showError ? setShowError(!showError) : null;
   };
 
@@ -101,9 +82,6 @@ const GetStartedField = () => {
       padding: 0 0.5rem;
       top: 22px;
     }
-    ${showError && formik.errors.email && formik.touched.email
-      ? "border-bottom: 2px solid yellow"
-      : null}
   `;
 
   const labelStyled = css`
@@ -113,7 +91,9 @@ const GetStartedField = () => {
     transition: 0.2s;
     color: #525252c7;
     z-index: 2;
-    ${focusEmail ? "top: -1.1rem; transition: 0.2s; font-size: 0.8rem" : null};
+    ${focusElement
+      ? "top: -1.1rem; transition: 0.2s; font-size: 0.8rem"
+      : null};
   `;
 
   const inputStyled = css`
@@ -121,7 +101,7 @@ const GetStartedField = () => {
     outline: none;
     border: none;
     width: 100%;
-    padding: 1.4rem 0.5rem;
+    padding: 1.5rem 0.5rem;
     height: fit-content;
     z-index: 1;
     background-color: transparent;
@@ -133,48 +113,72 @@ const GetStartedField = () => {
         width: 100%;
       `}
     >
-      <TextFieldStyled onSubmit={formik.handleSubmit}>
-        <InputField
-          containerStyled={containerStyled}
-          labelStyled={labelStyled}
-          inputStyled={inputStyled}
-          htmlFor="email"
-          id="email"
-          name="email"
-          type="email"
-          focusElement={focusEmail}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-          onClick={(e) => focusEmailInput(e)}
-          refe={wrapperRef}
-        />
-        <GetStartedButton
-          type="submit"
-          onClick={(e) => handleGetStartedButton(e)}
-        >
-          <p
+      <Formik
+        initialValues={{ email: "" }}
+        validationSchema={Yup.object({
+          email: Yup.string()
+            .email("*Please enter a correct email address")
+            .required("*Email required"),
+        })}
+        onSubmit={() => {
+          router.push("/signup/registration");
+        }}
+      >
+        {(formik) => (
+          <div
             css={css`
               margin: 0;
-              padding-right: 5px;
             `}
           >
-            Get Started
-          </p>
-          <ArrowForwardIosIcon />
-        </GetStartedButton>
-      </TextFieldStyled>
-
-      {formik.touched.email && formik.errors.email && showError ? (
-        <div
-          css={css`
-            color: yellow;
-            position: absolute;
-          `}
-        >
-          {formik.errors.email}
-        </div>
-      ) : null}
+            <TextFieldStyled onSubmit={formik.handleSubmit}>
+              <div
+                css={css`
+                  ${containerStyled} ${showError &&
+                  formik.errors.email &&
+                  formik.touched.email
+                    ? "border-bottom: 3px solid #ff9900"
+                    : null}
+                `}
+              >
+                <label css={labelStyled} htmlFor="email" />
+                <input
+                  css={inputStyled}
+                  id="email"
+                  type="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onClick={(e) => focusElementInput(e)}
+                  ref={wrapperRef}
+                />
+              </div>
+              <GetStartedButton
+                type="submit"
+                onClick={(e) => handleGetStartedButton(e, formik.values.email)}
+              >
+                <p
+                  css={css`
+                    margin: 0;
+                    padding-right: 5px;
+                  `}
+                >
+                  Get Started
+                </p>
+                <ArrowForwardIosIcon />
+              </GetStartedButton>
+            </TextFieldStyled>
+            {formik.touched.email && formik.errors.email ? (
+              <div
+                css={css`
+                  color: #ff9900;
+                  position: absolute;
+                `}
+              >
+                {formik.errors.email}
+              </div>
+            ) : null}
+          </div>
+        )}
+      </Formik>
     </div>
   );
 };
