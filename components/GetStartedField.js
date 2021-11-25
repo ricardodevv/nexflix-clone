@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import { setEmail } from "./Reducer";
 import { useStateValue } from "./StateProvider";
 import Formik from "./Formik";
+import Input from "./Input";
 import * as Yup from "yup";
 
 const TextFieldStyled = styled.form`
@@ -36,33 +37,9 @@ const GetStartedButton = styled((props) => <Button {...props}></Button>)(
 );
 
 const GetStartedField = () => {
-  const [focusElement, setfocusElement] = useState(false);
   const [showError, setShowError] = useState(false);
-  const wrapperRef = useRef(null);
   const router = useRouter();
   const [store, dispatch] = useStateValue();
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside, false);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, false);
-    };
-  });
-
-  const handleClickOutside = (e) => {
-    let divv = document.getElementById("email");
-    if (
-      e.target.id !== "email" &&
-      focusElement === true &&
-      divv.value.length === 0
-    ) {
-      setfocusElement(!focusElement);
-    }
-  };
-
-  const focusElementInput = (e) => {
-    !focusElement ? setfocusElement(!focusElement) : null;
-  };
 
   const handleGetStartedButton = (e, formikValue) => {
     dispatch(setEmail(formikValue));
@@ -91,9 +68,6 @@ const GetStartedField = () => {
     transition: 0.2s;
     color: #525252c7;
     z-index: 2;
-    ${focusElement
-      ? "top: -1.1rem; transition: 0.2s; font-size: 0.8rem"
-      : null};
   `;
 
   const inputStyled = css`
@@ -131,26 +105,13 @@ const GetStartedField = () => {
             `}
           >
             <TextFieldStyled onSubmit={formik.handleSubmit}>
-              <div
-                css={css`
-                  ${containerStyled} ${showError &&
-                  formik.errors.email &&
-                  formik.touched.email
-                    ? "border-bottom: 3px solid #ff9900"
-                    : null}
-                `}
-              >
-                <label css={labelStyled} htmlFor="email" />
-                <input
-                  css={inputStyled}
-                  id="email"
-                  type="email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onClick={(e) => focusElementInput(e)}
-                  ref={wrapperRef}
-                />
-              </div>
+              <Input
+                containerStyled={containerStyled}
+                labelStyled={labelStyled}
+                inputStyled={inputStyled}
+                formik={formik}
+                showError={showError}
+              />
               <GetStartedButton
                 type="submit"
                 onClick={(e) => handleGetStartedButton(e, formik.values.email)}
