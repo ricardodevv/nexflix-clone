@@ -10,6 +10,7 @@ import styled from "@emotion/styled";
 import * as Yup from "yup";
 import Formik from "../../components/Formik";
 import Input from "../../components/Input";
+import SubmitButton from "../../components/SubmitButton";
 
 const BoxStyled = styled(Box)(() => ({
   display: "flex",
@@ -32,6 +33,19 @@ const BoxStyled = styled(Box)(() => ({
     lineHeight: "1.3rem",
   },
 }));
+
+const buttonStyled = {
+  backgroundColor: "#e50914",
+  color: "white",
+  p: 1.2,
+  mt: 3,
+  borderRadius: "2px",
+  textTransform: "none",
+  fontSize: "1rem",
+  "&:hover": {
+    backgroundColor: "#e50914",
+  },
+};
 
 const Regform = () => {
   const [store, dispatch] = useStateValue();
@@ -124,6 +138,9 @@ const Regform = () => {
                 formikTouched={formik.touched.passwordConfirmation}
                 formikOnChange={formik.handleChange}
               />
+              <SubmitButton buttonStyled={buttonStyled} type="submit">
+                <p>Confirm</p>
+              </SubmitButton>
             </form>
           )}
         </Formik>
