@@ -9,6 +9,7 @@ import { useStateValue } from "../../components/StateProvider";
 import styled from "@emotion/styled";
 import * as Yup from "yup";
 import Formik from "../../components/Formik";
+import Input from "../../components/Input";
 
 const BoxStyled = styled(Box)(() => ({
   display: "flex",
@@ -96,22 +97,32 @@ const Regform = () => {
                 flex-direction: column;
               `}
             >
-              <label htmlFor="email">Email Address</label>
-              <input
+              <Input
                 id="email"
                 name="email"
                 type="email"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.email}
+                formikValue={formik.values.email}
+                formikErrors={formik.errors.email}
+                formikTouched={formik.touched.email}
+                formikOnChange={formik.handleChange}
               />
-              <label htmlFor="password">Password</label>
-              <input
+              <Input
                 id="password"
                 name="password"
                 type="password"
-                onChange={formik.handleChange}
-                value={formik.values.password}
+                formikValue={formik.values.password}
+                formikErrors={formik.errors.password}
+                formikTouched={formik.touched.password}
+                formikOnChange={formik.handleChange}
+              />
+              <Input
+                id="passwordConfirmation"
+                name="passwordConfirmation"
+                type="password"
+                formikValue={formik.values.passwordConfirmation}
+                formikErrors={formik.errors.passwordConfirmation}
+                formikTouched={formik.touched.passwordConfirmation}
+                formikOnChange={formik.handleChange}
               />
             </form>
           )}

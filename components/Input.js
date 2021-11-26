@@ -5,11 +5,16 @@ import { useState, useEffect, useRef } from "react";
 import { css } from "@emotion/react";
 
 const Input = ({
+  id,
+  name,
+  type,
   containerStyled,
   labelStyled,
   inputStyled,
-  formik,
-  showError,
+  formikValue,
+  formikErrors,
+  formikTouched,
+  formikOnChange,
 }) => {
   const [focusElement, setfocusElement] = useState(false);
   const wrapperRef = useRef(null);
@@ -39,27 +44,26 @@ const Input = ({
   return (
     <div
       css={css`
-        ${containerStyled} ${showError &&
-        formik.errors.email &&
-        formik.touched.email
+        ${containerStyled && containerStyled} ${formikErrors && formikTouched
           ? "border-bottom: 3px solid #ff9900"
           : null}
       `}
     >
       <label
         css={css`
-          ${labelStyled}${focusElement
+          ${labelStyled && labelStyled}${focusElement
             ? "top: -1.1rem; transition: 0.2s; font-size: 0.8rem"
             : null};
         `}
-        htmlFor="email"
+        htmlFor={name}
       />
       <input
         css={inputStyled}
-        id="email"
-        type="email"
-        value={formik.values.email}
-        onChange={formik.handleChange}
+        id={id}
+        name={name}
+        type={type}
+        value={formikValue}
+        onChange={formikOnChange}
         onClick={(e) => focusElementInput(e)}
         ref={wrapperRef}
       />
