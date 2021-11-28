@@ -27,9 +27,9 @@ const Input = ({
   });
 
   const handleClickOutside = (e) => {
-    let divv = document.getElementById("email");
+    let divv = document.getElementById(name);
     if (
-      e.target.id !== "email" &&
+      e.target.id !== name &&
       focusElement === true &&
       divv.value.length === 0
     ) {
@@ -44,7 +44,17 @@ const Input = ({
   return (
     <div
       css={css`
-        ${containerStyled && containerStyled} ${formikErrors && formikTouched
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        label::before {
+          ${containerStyled}
+          position: absolute;
+          padding: 0 0.5rem;
+          top: 22px;
+        }
+        ${formikErrors && formikTouched
           ? "border-bottom: 3px solid #ff9900"
           : null}
       `}
@@ -52,7 +62,7 @@ const Input = ({
       <label
         css={css`
           ${labelStyled && labelStyled}${focusElement
-            ? "top: -1.1rem; transition: 0.2s; font-size: 0.8rem"
+            ? "top: -1.1rem; transition: 0.1s; font-size: 0.8rem; font-weight: 700"
             : null};
         `}
         htmlFor={name}

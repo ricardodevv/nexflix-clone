@@ -10,6 +10,7 @@ import styled from "@emotion/styled";
 import * as Yup from "yup";
 import Formik from "../../components/Formik";
 import Input from "../../components/Input";
+import SubmitButton from "../../components/SubmitButton";
 
 const BoxStyled = styled(Box)(() => ({
   display: "flex",
@@ -32,6 +33,39 @@ const BoxStyled = styled(Box)(() => ({
     lineHeight: "1.3rem",
   },
 }));
+
+const buttonStyled = {
+  fontSize: "1.5rem",
+  padding: "0 1rem",
+  textTransform: "none",
+  backgroundColor: "#e50914",
+  borderRadius: 0,
+  color: "white",
+  "&:hover": {
+    transition: "none",
+    backgroundColor: "#e50914",
+  },
+};
+
+const labelStyled = css`
+  position: absolute;
+  top: -0.2rem;
+  width: 100%;
+  transition: 0.2s;
+  color: #525252c7;
+  z-index: 2;
+`;
+
+const inputStyled = css`
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 1.5rem 0.5rem;
+  height: fit-content;
+  z-index: 1;
+  background-color: transparent;
+`;
 
 const Regform = () => {
   const [store, dispatch] = useStateValue();
@@ -101,6 +135,11 @@ const Regform = () => {
                 id="email"
                 name="email"
                 type="email"
+                containerStyled={css`
+                  content: "Email Address";
+                `}
+                inputStyled={inputStyled}
+                labelStyled={labelStyled}
                 formikValue={formik.values.email}
                 formikErrors={formik.errors.email}
                 formikTouched={formik.touched.email}
@@ -110,6 +149,11 @@ const Regform = () => {
                 id="password"
                 name="password"
                 type="password"
+                containerStyled={css`
+                  content: "Password";
+                `}
+                inputStyled={inputStyled}
+                labelStyled={labelStyled}
                 formikValue={formik.values.password}
                 formikErrors={formik.errors.password}
                 formikTouched={formik.touched.password}
@@ -119,11 +163,19 @@ const Regform = () => {
                 id="passwordConfirmation"
                 name="passwordConfirmation"
                 type="password"
+                containerStyled={css`
+                  content: "Confirm password";
+                `}
+                inputStyled={inputStyled}
+                labelStyled={labelStyled}
                 formikValue={formik.values.passwordConfirmation}
                 formikErrors={formik.errors.passwordConfirmation}
                 formikTouched={formik.touched.passwordConfirmation}
                 formikOnChange={formik.handleChange}
               />
+              <SubmitButton type="submit" buttonStyled={buttonStyled}>
+                Next
+              </SubmitButton>
             </form>
           )}
         </Formik>
