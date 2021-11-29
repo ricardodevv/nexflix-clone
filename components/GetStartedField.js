@@ -1,7 +1,6 @@
 /*
  * @jsxImportSource @emotion/react
  */
-import { useState } from "react";
 import { css } from "@emotion/react";
 import { useRouter } from "next/router";
 import styled from "@emotion/styled";
@@ -11,7 +10,6 @@ import { useStateValue } from "./StateProvider";
 import Formik from "./Formik";
 import Input from "./Input";
 import * as Yup from "yup";
-import Button from "@mui/material/Button";
 import SubmitButton from "./SubmitButton";
 
 const TextFieldStyled = styled.form`
@@ -37,22 +35,9 @@ const buttonStyled = {
 
 // GetStartedField style variables
 
-const containerStyled = css`
-  flex: 1;
-  position: relative;
-  display: flex;
-  align-items: center;
-  label::before {
-    content: "Email address";
-    position: absolute;
-    padding: 0 0.5rem;
-    top: 22px;
-  }
-`;
-
 const labelStyled = css`
   position: absolute;
-  top: 0rem;
+  top: -0.2rem;
   width: 100%;
   transition: 0.2s;
   color: #525252c7;
@@ -103,15 +88,17 @@ const GetStartedField = () => {
                 id="email"
                 name="email"
                 type="email"
+                containerStyled={css`
+                  content: "Email Address";
+                `}
                 inputStyled={inputStyled}
-                containerStyled={containerStyled}
                 labelStyled={labelStyled}
                 formikValue={formik.values.email}
                 formikErrors={formik.errors.email}
                 formikTouched={formik.touched.email}
                 formikOnChange={formik.handleChange}
               />
-              <SubmitButton buttonStyled={buttonStyled} type="submit">
+              <SubmitButton type="submit" buttonStyled={buttonStyled}>
                 <p
                   css={css`
                     margin: 0;
