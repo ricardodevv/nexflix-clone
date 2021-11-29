@@ -31,21 +31,32 @@ const BoxStyled = styled(Box)(() => ({
   "& #p-text": {
     fontSize: "1.15rem",
     lineHeight: "1.3rem",
+    marginBottom: "0.5rem",
   },
 }));
 
 const buttonStyled = {
   fontSize: "1.5rem",
-  padding: "0 1rem",
   textTransform: "none",
   backgroundColor: "#e50914",
   borderRadius: 0,
   color: "white",
+  marginTop: "2rem",
   "&:hover": {
     transition: "none",
     backgroundColor: "#e50914",
   },
 };
+
+const containerStyled = css`
+  flex: 1;
+  position: relative;
+  display: flex;
+  margin: 0.3rem 0;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 2px;
+`;
 
 const labelStyled = css`
   position: absolute;
@@ -56,15 +67,26 @@ const labelStyled = css`
   z-index: 2;
 `;
 
+const labelTransition = css`
+  top: -1.1rem;
+  transition: 0.1s;
+  font-size: 0.8rem;
+  font-weight: 700;
+`;
+
 const inputStyled = css`
   font-size: 1rem;
   outline: none;
   border: none;
   width: 100%;
-  padding: 1.5rem 0.5rem;
+  padding: 1.3rem 0.5rem;
   height: fit-content;
   z-index: 1;
   background-color: transparent;
+`;
+
+const inputError = css`
+  border: 1px solid red;
 `;
 
 const Regform = () => {
@@ -117,7 +139,14 @@ const Regform = () => {
           validationSchema={Yup.object({
             email: Yup.string()
               .email("*Please enter a correct email address")
-              .required("*Email required"),
+              .required("Email required!"),
+            password: Yup.string()
+              .required("*Password required")
+              .min(8, "*Password should be minimun 8 characters length")
+              .matches(
+                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+              ),
           })}
           onSubmit={() => {
             router.push("/signup/registration");
@@ -135,10 +164,11 @@ const Regform = () => {
                 id="email"
                 name="email"
                 type="email"
-                containerStyled={css`
-                  content: "Email Address";
-                `}
+                labelContent="Email"
+                labelTransition={labelTransition}
+                containerStyled={containerStyled}
                 inputStyled={inputStyled}
+                inputError={inputError}
                 labelStyled={labelStyled}
                 formikValue={formik.values.email}
                 formikErrors={formik.errors.email}
@@ -149,28 +179,15 @@ const Regform = () => {
                 id="password"
                 name="password"
                 type="password"
-                containerStyled={css`
-                  content: "Password";
-                `}
+                labelContent="Add a password"
+                labelTransition={labelTransition}
+                containerStyled={containerStyled}
                 inputStyled={inputStyled}
+                inputError={inputError}
                 labelStyled={labelStyled}
                 formikValue={formik.values.password}
                 formikErrors={formik.errors.password}
                 formikTouched={formik.touched.password}
-                formikOnChange={formik.handleChange}
-              />
-              <Input
-                id="passwordConfirmation"
-                name="passwordConfirmation"
-                type="password"
-                containerStyled={css`
-                  content: "Confirm password";
-                `}
-                inputStyled={inputStyled}
-                labelStyled={labelStyled}
-                formikValue={formik.values.passwordConfirmation}
-                formikErrors={formik.errors.passwordConfirmation}
-                formikTouched={formik.touched.passwordConfirmation}
                 formikOnChange={formik.handleChange}
               />
               <SubmitButton type="submit" buttonStyled={buttonStyled}>

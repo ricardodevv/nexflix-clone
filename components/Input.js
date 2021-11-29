@@ -8,19 +8,27 @@ const Input = ({
   id,
   name,
   type,
+  labelContent,
   containerStyled,
   labelStyled,
+  labelTransition,
   inputStyled,
   formikValue,
   formikErrors,
   formikTouched,
   formikOnChange,
+  inputError,
 }) => {
   const [focusElement, setfocusElement] = useState(false);
   const wrapperRef = useRef(null);
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, false);
+    let divv = document.getElementById(name);
+    divv.value.length !== 0 && focusElement === false
+      ? setfocusElement(!focusElement)
+      : null;
+
     return () => {
       document.removeEventListener("click", handleClickOutside, false);
     };
@@ -44,29 +52,28 @@ const Input = ({
   return (
     <div
       css={css`
-        flex: 1;
-        position: relative;
-        display: flex;
-        align-items: center;
-        label::before {
-          ${containerStyled}
-          position: absolute;
-          padding: 0 0.5rem;
-          top: 22px;
-        }
-        ${formikErrors && formikTouched
-          ? "border-bottom: 3px solid #ff9900"
-          : null}
+        ${containerStyled}
+        ${formikErrors && formikTouched ? inputError : null}
       `}
     >
       <label
         css={css`
-          ${labelStyled && labelStyled}${focusElement
-            ? "top: -1.1rem; transition: 0.1s; font-size: 0.8rem; font-weight: 700"
+          ${labelStyled && labelStyled}${focusElement && labelTransition
+            ? labelTransition
             : null};
         `}
         htmlFor={name}
-      />
+      >
+        <span
+          css={css`
+            position: absolute;
+            padding: 0 0.5rem;
+            top: 22px;
+          `}
+        >
+          {labelContent}
+        </span>
+      </label>
       <input
         css={inputStyled}
         id={id}

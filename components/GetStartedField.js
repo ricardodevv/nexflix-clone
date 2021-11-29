@@ -35,13 +35,28 @@ const buttonStyled = {
 
 // GetStartedField style variables
 
+const containerStyled = css`
+  flex: 1;
+  position: relative;
+  display: flex;
+  margin: 0.3rem 0;
+  align-items: center;
+`;
+
 const labelStyled = css`
   position: absolute;
-  top: -0.2rem;
+  top: -0.5rem;
   width: 100%;
   transition: 0.2s;
   color: #525252c7;
   z-index: 2;
+`;
+
+const labelTransition = css`
+  top: -1.3rem;
+  transition: 0.1s;
+  font-size: 0.8rem;
+  font-weight: 700;
 `;
 
 const inputStyled = css`
@@ -49,7 +64,7 @@ const inputStyled = css`
   outline: none;
   border: none;
   width: 100%;
-  padding: 1.5rem 0.5rem;
+  padding: 1.3rem 0.5rem;
   height: fit-content;
   z-index: 1;
   background-color: transparent;
@@ -88,9 +103,9 @@ const GetStartedField = () => {
                 id="email"
                 name="email"
                 type="email"
-                containerStyled={css`
-                  content: "Email Address";
-                `}
+                labelContent="Email"
+                labelTransition={labelTransition}
+                containerStyled={containerStyled}
                 inputStyled={inputStyled}
                 labelStyled={labelStyled}
                 formikValue={formik.values.email}
