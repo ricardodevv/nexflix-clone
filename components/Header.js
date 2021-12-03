@@ -1,5 +1,7 @@
 /* @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import logo from "../src/pictures/logo.svg";
 import Image from "next/image";
 import Button from "@mui/material/Button";
@@ -56,7 +58,7 @@ const SelectLangStyled = css`
   }
 `;
 
-const HeaderBox = styled("div")(({ theme }) => ({
+const HeaderBox = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -64,14 +66,21 @@ const HeaderBox = styled("div")(({ theme }) => ({
   zIndex: 3,
 }));
 
-const Logo = styled("div")(({ theme }) => ({
+const Logo = styled("div")(() => ({
   width: "12.5rem",
   padding: "1rem",
   margin: "1rem 2rem",
 }));
 
+const LogoLogin = styled(Logo)(() => ({
+  cursor: "pointer",
+}));
+
 const Header = () => {
-  return (
+  const router = useRouter();
+  console.log(router.route === "/" ? "Home page" : router.route);
+
+  return router.route !== "/login" ? (
     <HeaderBox>
       <Logo id="logo">
         <Image src={logo} objectFit="fill" alt="Home" />
@@ -92,23 +101,33 @@ const Header = () => {
         >
           <SelectLang styles={SelectLangStyled} />
         </div>
-        <Button
-          sx={{
-            textTransform: "none",
-            backgroundColor: "#e50914",
-            color: "white",
-            fontSize: 17,
-            ml: 3,
-            p: "2px 15px",
-            "&:hover": {
-              transition: "none",
+        <Link href="/login">
+          <Button
+            sx={{
+              textTransform: "none",
               backgroundColor: "#e50914",
-            },
-          }}
-        >
-          Sign in
-        </Button>
+              color: "white",
+              fontSize: 17,
+              ml: 3,
+              p: "2px 15px",
+              "&:hover": {
+                transition: "none",
+                backgroundColor: "#e50914",
+              },
+            }}
+          >
+            Sign in
+          </Button>
+        </Link>
       </Box>
+    </HeaderBox>
+  ) : (
+    <HeaderBox>
+      <Link href="/">
+        <LogoLogin id="logo">
+          <Image src={logo} objectFit="fill" alt="Home" />
+        </LogoLogin>
+      </Link>
     </HeaderBox>
   );
 };

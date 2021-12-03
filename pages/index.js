@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import Layout from "../components/Layout";
 import Image from "next/image";
-import indexjpg from "../src/pictures/index.jpg";
+import backgroundjpg from "../src/pictures/mainbackground.jpg";
 import tvimage from "../src/pictures/tv.png";
 import mobileimage from "../src/pictures/mobile.jpg";
 import strangerthings from "../src/pictures/boxshot.png";
@@ -60,7 +60,7 @@ const Home = () => {
             `}
           >
             <Image
-              src={indexjpg}
+              src={backgroundjpg}
               alt="series-background"
               layout="fill"
               objectFit="cover"

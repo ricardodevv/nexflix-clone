@@ -4,6 +4,8 @@ import { css } from "@emotion/react";
 import SelectLang from "./SelectLang";
 
 const SelectLangStyled = css`
+  position: relative;
+
   #selectContainer {
     border: 1px solid gray;
     border-radius: 3px;
@@ -12,7 +14,6 @@ const SelectLangStyled = css`
     align-items: center;
     cursor: pointer;
     padding: 0 0.5rem;
-    position: relative;
     color: gray;
     outline: white;
   }
@@ -26,7 +27,7 @@ const SelectLangStyled = css`
     border: 1px gray solid;
     position: absolute;
     background-color: white;
-    top: 229.4rem;
+    top: -2.7rem;
 
     ul {
       padding: 0;

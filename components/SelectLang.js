@@ -30,7 +30,7 @@ const SelectLang = ({ styles }) => {
   };
 
   return (
-    <Box sx={styles}>
+    <div css={styles}>
       <div
         id="selectContainer"
         onClick={(event) => handleChangeShowMenuitems(event)}
@@ -47,7 +47,7 @@ const SelectLang = ({ styles }) => {
           </ul>
         </div>
       ) : null}
-    </Box>
+    </div>
   );
 };
 
