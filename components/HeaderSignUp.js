@@ -5,7 +5,7 @@ import logo from "../src/pictures/logo.svg";
 import { styled } from "@mui/material/styles";
 import { css } from "@emotion/react";
 
-const HeaderBox = styled("div")(({ theme }) => ({
+const HeaderBox = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -14,14 +14,14 @@ const HeaderBox = styled("div")(({ theme }) => ({
   borderBottom: "1px solid #0000001a",
 }));
 
-const Logo = styled("div")(({ theme }) => ({
+const Logo = styled("div")(() => ({
   width: "10.5rem",
   padding: "1rem 0",
   margin: "0.5rem 0 0 2rem",
   cursor: "pointer",
 }));
 
-const SignIn = styled("div")(({ theme }) => ({
+const SignIn = styled("div")(() => ({
   margin: "0 2em",
   "& a": {
     textDecoration: "none",

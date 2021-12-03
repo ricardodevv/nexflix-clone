@@ -21,25 +21,24 @@ const Input = ({
 }) => {
   const [focusElement, setfocusElement] = useState(false);
   const wrapperRef = useRef(null);
+  console.log(wrapperRef);
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside, false);
-    let divv = document.getElementById(name);
-    divv.value.length !== 0 && focusElement === false
+    document.addEventListener("click", handleClickOutside, true);
+    wrapperRef.current.value.length !== 0 && focusElement === false
       ? setfocusElement(!focusElement)
       : null;
 
     return () => {
-      document.removeEventListener("click", handleClickOutside, false);
+      document.removeEventListener("click", handleClickOutside, true);
     };
   });
 
   const handleClickOutside = (e) => {
-    let divv = document.getElementById(name);
     if (
-      e.target.id !== name &&
+      e.target.id !== id &&
       focusElement === true &&
-      divv.value.length === 0
+      wrapperRef.current.value.length === 0
     ) {
       setfocusElement(!focusElement);
     }

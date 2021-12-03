@@ -123,7 +123,7 @@ const Home = () => {
                 Ready to watch? Enter your email to create or restart your
                 membership.
               </p>
-              <GetStartedField />
+              <GetStartedField id="getStarted1" />
             </div>
           </div>
         </div>
@@ -652,7 +652,7 @@ const Home = () => {
                 Ready to watch? Enter your email to create or restart your
                 membership.
               </h4>
-              <GetStartedField />
+              <GetStartedField id="getStarted2" />
             </Box>
           </div>
         </div>

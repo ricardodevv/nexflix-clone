@@ -100,7 +100,7 @@ const GetStartedField = () => {
           >
             <TextFieldStyled onSubmit={formik.handleSubmit}>
               <Input
-                id="email"
+                id="get1"
                 name="email"
                 type="email"
                 labelContent="Email"
