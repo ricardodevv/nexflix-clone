@@ -2,8 +2,8 @@
  * @jsxImportSource @emotion/react
  */
 import { css } from "@emotion/react";
+import { useRouter } from "next/router";
 import Box from "@mui/material/Box";
-import { useFormik } from "formik";
 import LayoutSignUp from "../../components/LayoutSignUp";
 import { useStateValue } from "../../components/StateProvider";
 import styled from "@emotion/styled";
@@ -11,6 +11,7 @@ import * as Yup from "yup";
 import Formik from "../../components/Formik";
 import Input from "../../components/Input";
 import SubmitButton from "../../components/SubmitButton";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const BoxStyled = styled(Box)(() => ({
   display: "flex",
@@ -91,33 +92,21 @@ const inputError = css`
 
 const Regform = () => {
   const [store, dispatch] = useStateValue();
-  console.log(store);
+  const router = useRouter();
 
-  const formik = useFormik({
-    initialValues: {
-      email: store.email.length !== 0 ? store.email : "",
-      password: "",
-      passwordConfirmation: "",
-    },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .email("*Invalid email address")
-        .required("*Email required"),
-      password: Yup.string()
-        .required("*Password required")
-        .min(8, "*Password should be minimun 8 characters length")
-        .matches(
-          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-        ),
-      passwordConfirmation: Yup.string()
-        .required()
-        .oneOf([Yup.ref("password"), null], "Passwords must match"),
-    }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const registerUser = (email, password) => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
 
   return (
     <LayoutSignUp>
@@ -139,17 +128,14 @@ const Regform = () => {
           validationSchema={Yup.object({
             email: Yup.string()
               .email("*Please enter a correct email address")
-              .required("Email required!"),
+              .required("*Email required"),
             password: Yup.string()
               .required("*Password required")
-              .min(8, "*Password should be minimun 8 characters length")
-              .matches(
-                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-              ),
+              .min(8, "*Password should be minimun 8 characters length"),
           })}
-          onSubmit={() => {
-            router.push("/signup/registration");
+          onSubmit={async (values) => {
+            await registerUser(values.email, values.password);
+            router.push("/home");
           }}
         >
           {(formik) => (
@@ -175,6 +161,15 @@ const Regform = () => {
                 formikTouched={formik.touched.email}
                 formikOnChange={formik.handleChange}
               />
+              {formik.touched.email && formik.errors.email ? (
+                <div
+                  css={css`
+                    color: #ff9900;
+                  `}
+                >
+                  {formik.errors.email}
+                </div>
+              ) : null}
               <Input
                 id="password"
                 name="password"
@@ -190,6 +185,15 @@ const Regform = () => {
                 formikTouched={formik.touched.password}
                 formikOnChange={formik.handleChange}
               />
+              {formik.touched.password && formik.errors.password ? (
+                <div
+                  css={css`
+                    color: #ff9900;
+                  `}
+                >
+                  {formik.errors.password}
+                </div>
+              ) : null}
               <SubmitButton type="submit" buttonStyled={buttonStyled}>
                 Next
               </SubmitButton>

@@ -21,7 +21,6 @@ const Input = ({
 }) => {
   const [focusElement, setfocusElement] = useState(false);
   const wrapperRef = useRef(null);
-  console.log(wrapperRef);
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);

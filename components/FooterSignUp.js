@@ -57,7 +57,7 @@ const FooterSignUp = () => {
         color: gray;
       `}
     >
-      <Box sx={{ margin: "auto 5rem" }}>
+      <Box sx={{ margin: "auto 5rem", paddingBottom: "1rem" }}>
         <div
           css={css`
             padding: 2rem 0 1rem 0;
