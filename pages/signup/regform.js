@@ -12,6 +12,7 @@ import Formik from "../../components/Formik";
 import Input from "../../components/Input";
 import SubmitButton from "../../components/SubmitButton";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { setUser } from "../../components/Reducer";
 
 const BoxStyled = styled(Box)(() => ({
   display: "flex",
@@ -100,10 +101,13 @@ const Regform = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        dispatch(setUser(user.email));
+        router.push("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(`${errorCode} ${errorMessage}`);
         // ..
       });
   };
@@ -133,9 +137,8 @@ const Regform = () => {
               .required("*Password required")
               .min(8, "*Password should be minimun 8 characters length"),
           })}
-          onSubmit={async (values) => {
-            await registerUser(values.email, values.password);
-            router.push("/home");
+          onSubmit={(values) => {
+            registerUser(values.email, values.password);
           }}
         >
           {(formik) => (

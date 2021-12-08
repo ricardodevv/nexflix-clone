@@ -7,6 +7,7 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   initializeApp(firebaseConfig);
+
   return (
     <StateProvider reducer={reducer} store={store}>
       <Component {...pageProps} />

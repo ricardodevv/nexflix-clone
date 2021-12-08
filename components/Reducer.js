@@ -1,6 +1,4 @@
-export const store = {
-  email: "",
-};
+export const store = { email: [], user: [] };
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -8,6 +6,11 @@ export const reducer = (state, action) => {
       return {
         ...state,
         email: action.data.email,
+      };
+    case "setUser":
+      return {
+        ...state,
+        user: action.data.user,
       };
     default:
       state;
@@ -19,6 +22,15 @@ export const setEmail = (email) => {
     type: "setEmail",
     data: {
       email,
+    },
+  };
+};
+
+export const setUser = (user) => {
+  return {
+    type: "setUser",
+    data: {
+      user,
     },
   };
 };
