@@ -11,8 +11,9 @@ import * as Yup from "yup";
 import Formik from "../../components/Formik";
 import Input from "../../components/Input";
 import SubmitButton from "../../components/SubmitButton";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../../components/Reducer";
+import { auth } from "../../firebase";
 
 const BoxStyled = styled(Box)(() => ({
   display: "flex",
@@ -95,21 +96,16 @@ const Regform = () => {
   const [store, dispatch] = useStateValue();
   const router = useRouter();
 
-  const registerUser = (email, password) => {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        dispatch(setUser(user.email));
-        router.push("/");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(`${errorCode} ${errorMessage}`);
-        // ..
-      });
+  const registerUser = async (email, password) => {
+    try {
+      const user = await createUserWithEmailAndPassword(auth, email, password);
+      dispatch(setUser(user.email));
+      router.push("/");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(`${errorCode} ${errorMessage}`);
+    }
   };
 
   return (
@@ -127,7 +123,6 @@ const Regform = () => {
           initialValues={{
             email: store.email ? store.email : "",
             password: "",
-            passwordConfirm: "",
           }}
           validationSchema={Yup.object({
             email: Yup.string()

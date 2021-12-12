@@ -19,11 +19,12 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AddIcon from "@mui/icons-material/Add";
 import GetStartedField from "../components/GetStartedField";
 import { useRouter } from "next/router";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import Home from "../components/Home";
 import { setUser } from "../components/Reducer";
 import { useStateValue } from "../components/StateProvider";
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const AccordionStyled = styled((props) => <Accordion {...props} />)(() => ({
   backgroundColor: "#343434",
@@ -50,10 +51,17 @@ const Index = () => {
   const router = useRouter();
   console.log(store.user);
 
+  useEffect(() => {
+    const unsuscribe = auth.onAuthStateChanged((user) => {
+      dispatch(setUser(user));
+    });
+    return unsuscribe;
+  }, []);
+
   return (
     <Layout pageTitle="Nextflix latam">
       <div>
-        {store.user.length === 0 ? (
+        {store.user === null ? (
           <div>
             <div
               css={css`

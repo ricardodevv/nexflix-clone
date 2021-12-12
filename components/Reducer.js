@@ -1,4 +1,4 @@
-export const store = { email: [], user: [] };
+export const store = { email: [], user: [null] };
 
 export const reducer = (state, action) => {
   switch (action.type) {

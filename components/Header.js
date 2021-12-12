@@ -8,6 +8,9 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import styled from "@emotion/styled";
 import SelectLang from "./SelectLang";
+import { useStateValue } from "./StateProvider";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 const SelectLangStyled = css`
   #selectContainer {
@@ -77,8 +80,13 @@ const LogoLogin = styled(Logo)(() => ({
 }));
 
 const Header = () => {
+  const [store, dispatch] = useStateValue();
   const router = useRouter();
   console.log(router.route === "/" ? "Home page" : router.route);
+
+  const logout = async () => {
+    await signOut(auth);
+  };
 
   return router.route !== "/login" ? (
     <HeaderBox>
@@ -101,24 +109,28 @@ const Header = () => {
         >
           <SelectLang styles={SelectLangStyled} />
         </div>
-        <Link href="/login">
-          <Button
-            sx={{
-              textTransform: "none",
-              backgroundColor: "#e50914",
-              color: "white",
-              fontSize: 17,
-              ml: 3,
-              p: "2px 15px",
-              "&:hover": {
-                transition: "none",
+        {store.user === null ? (
+          <Link href="/login">
+            <Button
+              sx={{
+                textTransform: "none",
                 backgroundColor: "#e50914",
-              },
-            }}
-          >
-            Sign in
-          </Button>
-        </Link>
+                color: "white",
+                fontSize: 17,
+                ml: 3,
+                p: "2px 15px",
+                "&:hover": {
+                  transition: "none",
+                  backgroundColor: "#e50914",
+                },
+              }}
+            >
+              Sign in
+            </Button>
+          </Link>
+        ) : (
+          <Button onClick={() => logout()}>Log out</Button>
+        )}
       </Box>
     </HeaderBox>
   ) : (
