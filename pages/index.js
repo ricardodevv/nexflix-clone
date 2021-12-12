@@ -24,7 +24,6 @@ import Home from "../components/Home";
 import { setUser } from "../components/Reducer";
 import { useStateValue } from "../components/StateProvider";
 import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
 
 const AccordionStyled = styled((props) => <Accordion {...props} />)(() => ({
   backgroundColor: "#343434",
@@ -104,7 +103,7 @@ const Index = () => {
                     display: flex;
                     flex-direction: column;
                     width: 40rem;
-                    margin: auto;
+                    margin: 30rem auto;
                     z-index: 4;
                     align-items: center;
                     justify-content: center;

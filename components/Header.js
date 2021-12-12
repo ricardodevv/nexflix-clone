@@ -63,9 +63,10 @@ const SelectLangStyled = css`
 
 const HeaderBox = styled("div")(() => ({
   display: "flex",
+  width: "100%",
   alignItems: "center",
   justifyContent: "space-between",
-  position: "relative",
+  position: "absolute",
   zIndex: 3,
 }));
 

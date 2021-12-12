@@ -53,6 +53,7 @@ const Footer = () => {
     <footer
       css={css`
         background-color: black;
+        position: relative;
       `}
     >
       <Box
@@ -60,7 +61,7 @@ const Footer = () => {
           maxWidth: "1100px",
           color: "#757575",
           margin: "auto",
-          padding: "4rem",
+          padding: "2rem",
           "& li": {
             listStyle: "none",
           },
