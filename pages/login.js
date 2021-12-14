@@ -16,7 +16,6 @@ import { useSession, signIn } from "next-auth/react";
 
 const login = () => {
   const [store, dispatch] = useStateValue();
-  const { data: session } = useSession();
 
   const loginUser = async (email, password) => {
     try {
