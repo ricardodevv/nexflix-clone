@@ -8,21 +8,19 @@ import Layout from "../components/Layout";
 import { useStateValue } from "../components/StateProvider";
 import SubmitButton from "../components/SubmitButton";
 import * as Yup from "yup";
-import { auth } from "../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import router from "next/router";
 import { setUser } from "../components/Reducer";
 import loginbackground from "../src/pictures/loginbackground.jpg";
 import Image from "next/image";
+import { useSession, signIn } from "next-auth/react";
 
 const login = () => {
   const [store, dispatch] = useStateValue();
+  const { data: session } = useSession();
 
   const loginUser = async (email, password) => {
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password);
-      dispatch(setUser(user));
-      router.push("/");
+      signIn();
     } catch (error) {
       console.log(error);
     }
@@ -144,7 +142,7 @@ const login = () => {
               </p>
               <Formik
                 initialValues={{
-                  email: store.email ? store.email : "",
+                  email: "",
                   password: "",
                 }}
                 validationSchema={Yup.object({

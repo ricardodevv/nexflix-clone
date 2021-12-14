@@ -1,12 +1,15 @@
 /* @jsxImportSource @emotion/react */
 import { reducer, store } from "../components/Reducer";
 import { StateProvider } from "../components/StateProvider";
+import { SessionProvider } from "next-auth/react";
 import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <StateProvider reducer={reducer} store={store}>
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </StateProvider>
   );
 }

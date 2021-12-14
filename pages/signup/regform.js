@@ -11,9 +11,7 @@ import * as Yup from "yup";
 import Formik from "../../components/Formik";
 import Input from "../../components/Input";
 import SubmitButton from "../../components/SubmitButton";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../../components/Reducer";
-import { auth } from "../../firebase";
 
 const BoxStyled = styled(Box)(() => ({
   display: "flex",
@@ -98,9 +96,6 @@ const Regform = () => {
 
   const registerUser = async (email, password) => {
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      dispatch(setUser(user.email));
-      router.push("/");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;

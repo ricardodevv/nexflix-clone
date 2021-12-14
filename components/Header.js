@@ -8,9 +8,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import styled from "@emotion/styled";
 import SelectLang from "./SelectLang";
-import { useStateValue } from "./StateProvider";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
+import { useSession, signOut } from "next-auth/react";
 
 const SelectLangStyled = css`
   #selectContainer {
@@ -81,13 +79,8 @@ const LogoLogin = styled(Logo)(() => ({
 }));
 
 const Header = () => {
-  const [store, dispatch] = useStateValue();
   const router = useRouter();
-  console.log(router.route === "/" ? "Home page" : router.route);
-
-  const logout = async () => {
-    await signOut(auth);
-  };
+  const { data: session } = useSession();
 
   return router.route !== "/login" ? (
     <HeaderBox>
@@ -110,7 +103,7 @@ const Header = () => {
         >
           <SelectLang styles={SelectLangStyled} />
         </div>
-        {store.user === null ? (
+        {!session ? (
           <Link href="/login">
             <Button
               sx={{
@@ -130,7 +123,7 @@ const Header = () => {
             </Button>
           </Link>
         ) : (
-          <Button onClick={() => logout()}>Log out</Button>
+          <Button onClick={() => signOut()}>Log out</Button>
         )}
       </Box>
     </HeaderBox>

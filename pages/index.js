@@ -19,11 +19,10 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AddIcon from "@mui/icons-material/Add";
 import GetStartedField from "../components/GetStartedField";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import Home from "../components/Home";
 import { setUser } from "../components/Reducer";
 import { useStateValue } from "../components/StateProvider";
-import { auth } from "../firebase";
+import { useSession } from "next-auth/react";
 
 const AccordionStyled = styled((props) => <Accordion {...props} />)(() => ({
   backgroundColor: "#343434",
@@ -48,34 +47,33 @@ const AccordionSummaryStyled = styled((props) => (
 const Index = () => {
   const [store, dispatch] = useStateValue();
   const router = useRouter();
-  console.log(store.user);
-
-  useEffect(() => {
-    const unsuscribe = auth.onAuthStateChanged((user) => {
-      dispatch(setUser(user));
-    });
-    return unsuscribe;
-  }, []);
+  const { data: session } = useSession();
 
   return (
     <Layout pageTitle="Nextflix latam">
       <div>
-        {store.user === null ? (
+        {!session ? (
           <div>
             <div
               css={css`
+                background-color: black;
                 position: relative;
-                height: 40rem;
+                height: 41rem;
+                z-index: 0;
+                display: flex;
+                justify-content: center;
               `}
             >
               <div
                 css={css`
-                  position: relative;
+                  position: absolute;
                   top: -140px;
                   width: 100%;
                   height: 50rem;
                   display: flex;
                   border-bottom: 0.5rem solid #222222;
+                  opacity: 0.5;
+                  z-index: -1;
                 `}
               >
                 <Image
@@ -84,66 +82,51 @@ const Index = () => {
                   layout="fill"
                   objectFit="cover"
                 ></Image>
-                <div
+              </div>
+              <div
+                css={css`
+                  display: flex;
+                  flex-direction: column;
+                  width: 40rem;
+                  z-index: 4;
+                  align-items: center;
+                  justify-content: center;
+                `}
+              >
+                <h2
                   css={css`
-                    position: absolute;
-                    height: 100%;
-                    width: 100%;
-                    z-index: 0;
-                    background: linear-gradient(
-                      #000000ed,
-                      #00000059,
-                      #000000bd 80%
-                    );
-                  `}
-                ></div>
-                <div
-                  css={css`
-                    position: relative;
-                    display: flex;
-                    flex-direction: column;
-                    width: 40rem;
-                    margin: 30rem auto;
-                    z-index: 4;
-                    align-items: center;
-                    justify-content: center;
+                    color: white;
+                    font-size: 3rem;
+                    text-align: center;
+                    margin: 0;
+                    line-height: 1.1;
                   `}
                 >
-                  <h2
-                    css={css`
-                      color: white;
-                      font-size: 3rem;
-                      text-align: center;
-                      margin: 0;
-                      line-height: 1.1;
-                    `}
-                  >
-                    Unlimited movies, TV shows, and more.
-                  </h2>
-                  <p
-                    css={css`
-                      color: white;
-                      text-align: center;
-                      margin: 20px 0;
-                      font-size: 1.7rem;
-                    `}
-                  >
-                    Watch anywhere. Cancel anytime.
-                  </p>
-                  <p
-                    css={css`
-                      color: white;
-                      text-align: center;
-                      font-size: 1.2rem;
-                      margin: 0;
-                      padding: 10px 0 20px 0;
-                    `}
-                  >
-                    Ready to watch? Enter your email to create or restart your
-                    membership.
-                  </p>
-                  <GetStartedField id="getStarted1" />
-                </div>
+                  Unlimited movies, TV shows, and more.
+                </h2>
+                <p
+                  css={css`
+                    color: white;
+                    text-align: center;
+                    margin: 20px 0;
+                    font-size: 1.7rem;
+                  `}
+                >
+                  Watch anywhere. Cancel anytime.
+                </p>
+                <p
+                  css={css`
+                    color: white;
+                    text-align: center;
+                    font-size: 1.2rem;
+                    margin: 0;
+                    padding: 10px 0 20px 0;
+                  `}
+                >
+                  Ready to watch? Enter your email to create or restart your
+                  membership.
+                </p>
+                <GetStartedField id="getStarted1" />
               </div>
             </div>
             <div
