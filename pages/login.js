@@ -8,14 +8,20 @@ import Layout from "../components/Layout";
 import { useStateValue } from "../components/StateProvider";
 import SubmitButton from "../components/SubmitButton";
 import * as Yup from "yup";
-import router from "next/router";
-import { setUser } from "../components/Reducer";
 import loginbackground from "../src/pictures/loginbackground.jpg";
 import Image from "next/image";
 import { useSession, signIn } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const login = () => {
   const [store, dispatch] = useStateValue();
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    session ? router.push("/") : null;
+  });
 
   const loginUser = async (email, password) => {
     try {
