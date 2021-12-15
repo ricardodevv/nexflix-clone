@@ -13,6 +13,7 @@ const Layout = ({ pageTitle, children }) => {
         height: 100%;
       `}
     >
+      <title>{pageTitle}</title>
       <Header />
       {children}
       <Footer />

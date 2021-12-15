@@ -44,14 +44,33 @@ const AccordionSummaryStyled = styled((props) => (
 }));
 
 const Index = () => {
-  const [store, dispatch] = useStateValue();
-  const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
-  return (
-    <Layout pageTitle="Nextflix latam">
-      <div>
-        {!session ? (
+  console.log(session);
+  console.log(status);
+
+  if (status === "loading") {
+    return (
+      <div
+        css={css`
+          backgorund-color: black;
+        `}
+      >
+        <p
+          css={css`
+            color: white;
+          `}
+        >
+          Loading...
+        </p>
+      </div>
+    );
+  }
+
+  if (status !== "authenticated") {
+    return (
+      <Layout pageTitle="Nextflix latam">
+        <div>
           <div>
             <div
               css={css`
@@ -667,12 +686,18 @@ const Index = () => {
               </div>
             </div>
           </div>
-        ) : (
-          <Home />
-        )}
-      </div>
-    </Layout>
-  );
+        </div>
+      </Layout>
+    );
+  }
+
+  if (status === "authenticated") {
+    return (
+      <Layout pageTitle="Netflixapp - Home Page">
+        <Home />
+      </Layout>
+    );
+  }
 };
 
 export default Index;
