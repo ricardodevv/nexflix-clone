@@ -20,7 +20,6 @@ import AddIcon from "@mui/icons-material/Add";
 import GetStartedField from "../components/GetStartedField";
 import { useRouter } from "next/router";
 import Home from "../components/Home";
-import { setUser } from "../components/Reducer";
 import { useStateValue } from "../components/StateProvider";
 import { useSession } from "next-auth/react";
 
