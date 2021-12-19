@@ -44,8 +44,6 @@ const AccordionSummaryStyled = styled((props) => (
 }));
 
 const Index = () => {
-  const [store, dispatch] = useStateValue();
-  const router = useRouter();
   const { data: session } = useSession();
 
   return (
