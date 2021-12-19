@@ -10,18 +10,13 @@ import SubmitButton from "../components/SubmitButton";
 import * as Yup from "yup";
 import loginbackground from "../src/pictures/loginbackground.jpg";
 import Image from "next/image";
-import { useSession, signIn } from "next-auth/react";
+import { useSession, getSession, signIn } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 const login = () => {
-  const [store, dispatch] = useStateValue();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    session ? router.push("/") : null;
-  });
 
   const loginUser = async (email, password) => {
     try {
@@ -86,150 +81,159 @@ const login = () => {
     },
   };
 
-  return (
-    <Layout>
-      <div
-        css={css`
-          background-color: black;
-          min-height: 100%;
-          margin: 0;
-          padding: 0;
-          position: relative;
-          z-index: 0;
-        `}
-      >
+  if (session) {
+    return router.push("/");
+  }
+
+  if (!session) {
+    return (
+      <Layout>
         <div
           css={css`
-            height: 100%;
-            min-height: 100vh;
-            overflow: hidden;
-            display: block;
-            position: absolute;
-            width: 100%;
-            z-index: -1;
-            opacity: 0.5;
-          `}
-        >
-          <Image
-            src={loginbackground}
-            alt="background cover"
-            layout="fill"
-            objectFit="cover"
-          />
-        </div>
-        <div
-          css={css`
-            display: flex;
-            min-height: 100vh;
+            background-color: black;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            z-index: 0;
           `}
         >
           <div
             css={css`
-              margin: 6rem auto;
-              background-color: rgba(0, 0, 0, 0.75);
-              padding: 2rem 4rem;
-              width: 27rem;
+              height: 100%;
+              min-height: 100vh;
+              overflow: hidden;
+              display: block;
+              position: absolute;
+              width: 100%;
+              z-index: -1;
+              opacity: 0.5;
+            `}
+          >
+            <Image
+              src={loginbackground}
+              alt="background cover"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div
+            css={css`
+              display: flex;
+              min-height: 100vh;
             `}
           >
             <div
               css={css`
-                width: 100%;
+                margin: 6rem auto;
+                background-color: rgba(0, 0, 0, 0.75);
+                padding: 2rem 4rem;
+                width: 27rem;
               `}
             >
-              <p
+              <div
                 css={css`
-                  color: white;
-                  font-size: 2rem;
-                  padding: 1rem 0;
+                  width: 100%;
                 `}
               >
-                Login
-              </p>
-              <Formik
-                initialValues={{
-                  email: "",
-                  password: "",
-                }}
-                validationSchema={Yup.object({
-                  email: Yup.string()
-                    .email("*Please enter a correct email address")
-                    .required("*Email required"),
-                  password: Yup.string()
-                    .required("*Password required")
-                    .min(8, "*Password should be minimun 8 characters length"),
-                })}
-                onSubmit={(values) => {
-                  loginUser(values.email, values.password);
-                }}
-              >
-                {(formik) => (
-                  <form
-                    onSubmit={formik.handleSubmit}
-                    css={css`
-                      display: flex;
-                      flex-direction: column;
-                    `}
-                  >
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      labelContent="Email"
-                      labelTransition={labelTransition}
-                      containerStyled={containerStyled}
-                      inputStyled={inputStyled}
-                      inputError={inputError}
-                      labelStyled={labelStyled}
-                      formikValue={formik.values.email}
-                      formikErrors={formik.errors.email}
-                      formikTouched={formik.touched.email}
-                      formikOnChange={formik.handleChange}
-                    />
-                    {formik.touched.email && formik.errors.email ? (
-                      <div
-                        css={css`
-                          color: #ff9900;
-                        `}
-                      >
-                        {formik.errors.email}
-                      </div>
-                    ) : null}
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      labelContent="Add a password"
-                      labelTransition={labelTransition}
-                      containerStyled={containerStyled}
-                      inputStyled={inputStyled}
-                      inputError={inputError}
-                      labelStyled={labelStyled}
-                      formikValue={formik.values.password}
-                      formikErrors={formik.errors.password}
-                      formikTouched={formik.touched.password}
-                      formikOnChange={formik.handleChange}
-                    />
-                    {formik.touched.password && formik.errors.password ? (
-                      <div
-                        css={css`
-                          color: #ff9900;
-                        `}
-                      >
-                        {formik.errors.password}
-                      </div>
-                    ) : null}
-                    <SubmitButton type="submit" buttonStyled={buttonStyled}>
-                      Sign in
-                    </SubmitButton>
-                  </form>
-                )}
-              </Formik>
+                <p
+                  css={css`
+                    color: white;
+                    font-size: 2rem;
+                    padding: 1rem 0;
+                  `}
+                >
+                  Login
+                </p>
+                <Formik
+                  initialValues={{
+                    email: "",
+                    password: "",
+                  }}
+                  validationSchema={Yup.object({
+                    email: Yup.string()
+                      .email("*Please enter a correct email address")
+                      .required("*Email required"),
+                    password: Yup.string()
+                      .required("*Password required")
+                      .min(
+                        8,
+                        "*Password should be minimun 8 characters length"
+                      ),
+                  })}
+                  onSubmit={(values) => {
+                    loginUser(values.email, values.password);
+                  }}
+                >
+                  {(formik) => (
+                    <form
+                      onSubmit={formik.handleSubmit}
+                      css={css`
+                        display: flex;
+                        flex-direction: column;
+                      `}
+                    >
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        labelContent="Email"
+                        labelTransition={labelTransition}
+                        containerStyled={containerStyled}
+                        inputStyled={inputStyled}
+                        inputError={inputError}
+                        labelStyled={labelStyled}
+                        formikValue={formik.values.email}
+                        formikErrors={formik.errors.email}
+                        formikTouched={formik.touched.email}
+                        formikOnChange={formik.handleChange}
+                      />
+                      {formik.touched.email && formik.errors.email ? (
+                        <div
+                          css={css`
+                            color: #ff9900;
+                          `}
+                        >
+                          {formik.errors.email}
+                        </div>
+                      ) : null}
+                      <Input
+                        id="password"
+                        name="password"
+                        type="password"
+                        labelContent="Add a password"
+                        labelTransition={labelTransition}
+                        containerStyled={containerStyled}
+                        inputStyled={inputStyled}
+                        inputError={inputError}
+                        labelStyled={labelStyled}
+                        formikValue={formik.values.password}
+                        formikErrors={formik.errors.password}
+                        formikTouched={formik.touched.password}
+                        formikOnChange={formik.handleChange}
+                      />
+                      {formik.touched.password && formik.errors.password ? (
+                        <div
+                          css={css`
+                            color: #ff9900;
+                          `}
+                        >
+                          {formik.errors.password}
+                        </div>
+                      ) : null}
+                      <SubmitButton type="submit" buttonStyled={buttonStyled}>
+                        Sign in
+                      </SubmitButton>
+                    </form>
+                  )}
+                </Formik>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </Layout>
-  );
+      </Layout>
+    );
+  }
 };
 
 export default login;
