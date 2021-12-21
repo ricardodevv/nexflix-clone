@@ -6,11 +6,11 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
-    <StateProvider reducer={reducer} store={store}>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <StateProvider reducer={reducer} store={store}>
         <Component {...pageProps} />
-      </SessionProvider>
-    </StateProvider>
+      </StateProvider>
+    </SessionProvider>
   );
 }
 

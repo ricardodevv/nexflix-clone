@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import styled from "@emotion/styled";
 import SelectLang from "./SelectLang";
 import { useSession, signOut } from "next-auth/react";
+import UserIcon from "./UserIcon";
 
 const SelectLangStyled = css`
   #selectContainer {
@@ -21,6 +22,7 @@ const SelectLangStyled = css`
     padding: 0 0.5rem;
     position: relative;
     color: white;
+    background-color: black;
   }
 
   #langIcon {
@@ -100,30 +102,43 @@ const Header = () => {
             background-color: black;
             border-radius: 5px;
           `}
-        >
-          <SelectLang styles={SelectLangStyled} />
-        </div>
+        ></div>
+
         {!session ? (
-          <Link href="/login">
-            <Button
-              sx={{
-                textTransform: "none",
-                backgroundColor: "#e50914",
-                color: "white",
-                fontSize: 17,
-                ml: 3,
-                p: "2px 15px",
-                "&:hover": {
-                  transition: "none",
+          <div
+            css={css`
+              display: flex;
+            `}
+          >
+            <SelectLang styles={SelectLangStyled} />
+            <Link href="/login">
+              <Button
+                sx={{
+                  textTransform: "none",
                   backgroundColor: "#e50914",
-                },
-              }}
-            >
-              Sign in
-            </Button>
-          </Link>
+                  color: "white",
+                  fontSize: 17,
+                  ml: 3,
+                  p: "2px 15px",
+                  "&:hover": {
+                    transition: "none",
+                    backgroundColor: "#e50914",
+                  },
+                }}
+              >
+                Sign in
+              </Button>
+            </Link>
+          </div>
         ) : (
-          <Button onClick={() => signOut()}>Log out</Button>
+          <div
+            css={css`
+              display: flex;
+            `}
+          >
+            <UserIcon />
+            <Button onClick={() => signOut()}>Log out</Button>
+          </div>
         )}
       </Box>
     </HeaderBox>
