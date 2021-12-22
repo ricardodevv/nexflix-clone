@@ -5,13 +5,11 @@ import { css } from "@emotion/react";
 import Formik from "../components/Formik";
 import Input from "../components/Input";
 import Layout from "../components/Layout";
-import { useStateValue } from "../components/StateProvider";
 import SubmitButton from "../components/SubmitButton";
 import * as Yup from "yup";
 import loginbackground from "../src/pictures/loginbackground.jpg";
 import Image from "next/image";
-import { useSession, getSession, signIn } from "next-auth/react";
-import { useEffect } from "react";
+import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const containerStyled = css`

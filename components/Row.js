@@ -26,22 +26,31 @@ const Row = ({ title, fetchUrl }) => {
       <div
         css={css`
           display: flex;
+          overflow-y: hidden;
+          overflow-x: scroll;
         `}
       >
         {movies.map((element) => (
           <div
             key={element.id}
             css={css`
-              object-fit: contain;
               width: 100%;
               max-height: 100px;
+              margin-right: 10px;
+              transition: transform 450ms;
+              position: relative;
+
+              :hover {
+                transform: scale(1.08);
+                opacity: 1;
+              }
             `}
           >
             <Image
               src={`${imagesUrl}${element.poster_path}`}
               alt={element.name}
-              width={200}
-              height={200}
+              layout="fill"
+              objectFit="contain"
             />
           </div>
         ))}
