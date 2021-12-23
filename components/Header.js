@@ -66,7 +66,7 @@ const HeaderBox = styled("div")(() => ({
   width: "100%",
   alignItems: "center",
   justifyContent: "space-between",
-  position: "absolute",
+  position: "relative",
   zIndex: 3,
 }));
 

@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "../src/axios";
 import Image from "next/image";
 
-const Row = ({ title, fetchUrl }) => {
+const Row = ({ title, fetchUrl, isLargeRow }) => {
   const [movies, setMovies] = useState([]);
   const imagesUrl = "https://image.tmdb.org/t/p/original/";
 
@@ -20,6 +20,8 @@ const Row = ({ title, fetchUrl }) => {
     getMovies();
   }, [fetchUrl]);
 
+  console.log(movies);
+
   return (
     <div>
       <h2>{title}</h2>
@@ -28,6 +30,10 @@ const Row = ({ title, fetchUrl }) => {
           display: flex;
           overflow-y: hidden;
           overflow-x: scroll;
+          padding: 20px;
+          ::-webkit-scrollbar {
+            display: none;
+          }
         `}
       >
         {movies.map((element) => (
@@ -35,22 +41,26 @@ const Row = ({ title, fetchUrl }) => {
             key={element.id}
             css={css`
               width: 100%;
-              max-height: 100px;
               margin-right: 10px;
               transition: transform 450ms;
-              position: relative;
-
               :hover {
-                transform: scale(1.08);
                 opacity: 1;
+                ${isLargeRow
+                  ? `transform: scale(1.09);`
+                  : `transform: scale(1.08);`}
               }
+              ${isLargeRow ? `max-height: 250px` : `max-height: 120px;`}
             `}
           >
             <Image
-              src={`${imagesUrl}${element.poster_path}`}
+              src={`${imagesUrl}${
+                isLargeRow ? element.poster_path : element.backdrop_path
+              }`}
               alt={element.name}
-              layout="fill"
-              objectFit="contain"
+              width={`${isLargeRow ? 200 : 250}`}
+              height={`${isLargeRow ? 250 : 150}`}
+              layout="fixed"
+              objectFit="fill"
             />
           </div>
         ))}

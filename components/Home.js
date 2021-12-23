@@ -7,6 +7,7 @@ const Home = () => {
       <Row
         title="Netflix Originals"
         fetchUrl={requests.fetchNetflixOriginals}
+        isLargeRow
       ></Row>
       <Row title="Trending now" fetchUrl={requests.fetchTrending}></Row>
       <Row

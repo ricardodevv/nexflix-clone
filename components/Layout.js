@@ -9,8 +9,9 @@ const Layout = ({ pageTitle, children }) => {
   return (
     <div
       css={css`
-        background-color: transparent;
+        background-color: #141414;
         height: 100%;
+        color: white;
       `}
     >
       <title>{pageTitle}</title>
