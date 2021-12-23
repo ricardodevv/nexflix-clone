@@ -1,9 +1,11 @@
 import Row from "./Row";
 import requests from "../requests";
+import Banner from "./Banner";
 
 const Home = () => {
   return (
     <div>
+      <Banner />
       <Row
         title="Netflix Originals"
         fetchUrl={requests.fetchNetflixOriginals}

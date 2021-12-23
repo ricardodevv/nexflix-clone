@@ -66,12 +66,12 @@ const HeaderBox = styled("div")(() => ({
   width: "100%",
   alignItems: "center",
   justifyContent: "space-between",
-  position: "relative",
+  position: "absolute",
   zIndex: 3,
 }));
 
 const Logo = styled("div")(() => ({
-  width: "12.5rem",
+  maxWidth: "12.5rem",
   padding: "1rem",
   margin: "1rem 2rem",
 }));

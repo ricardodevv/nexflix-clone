@@ -29,17 +29,17 @@ const Index = () => {
     );
   }
 
-  // if (status !== "authenticated") {
-  //   return <HomeUnlogged />;
-  // }
+  if (status !== "authenticated") {
+    return <HomeUnlogged />;
+  }
 
-  // if (status === "authenticated") {
-  return (
-    <Layout pageTitle="Netflixapp - Home Page">
-      <Home />
-    </Layout>
-  );
-  // }
+  if (status === "authenticated") {
+    return (
+      <Layout pageTitle="Netflixapp - Home Page">
+        <Home />
+      </Layout>
+    );
+  }
 };
 
 export default Index;

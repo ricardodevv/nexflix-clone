@@ -23,7 +23,11 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
   console.log(movies);
 
   return (
-    <div>
+    <div
+      css={css`
+        padding: 1rem;
+      `}
+    >
       <h2>{title}</h2>
       <div
         css={css`
@@ -43,6 +47,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
               width: 100%;
               margin-right: 10px;
               transition: transform 450ms;
+              cursor: pointer;
               :hover {
                 opacity: 1;
                 ${isLargeRow

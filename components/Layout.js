@@ -9,7 +9,7 @@ const Layout = ({ pageTitle, children }) => {
   return (
     <div
       css={css`
-        background-color: #141414;
+        background-color: #111;
         height: 100%;
         color: white;
       `}
