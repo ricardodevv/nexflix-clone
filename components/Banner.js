@@ -12,10 +12,10 @@ const BannerStyled = styled.header`
   background-image: url(${(props) => props.url});
   background-position: center center;
   object-fit: contain;
-  height: 448px;
+  height: 615px;
 
   .banner__fadeBottom {
-    height: 16.4rem;
+    height: 27.4rem;
     background-image: linear-gradient(
       180deg,
       transparent,
@@ -27,7 +27,7 @@ const BannerStyled = styled.header`
 
 const BannerContents = styled.div`
   margin-left: 30px;
-  padding-top: 140px;
+  padding-top: 310px;
   height: 190px;
 
   .banner__title {

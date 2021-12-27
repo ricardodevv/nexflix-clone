@@ -48,13 +48,16 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
               margin-right: 10px;
               transition: transform 450ms;
               cursor: pointer;
+              border: 2px solid #111;
+
               :hover {
                 opacity: 1;
+                border: 2px solid white;
                 ${isLargeRow
                   ? `transform: scale(1.09);`
                   : `transform: scale(1.08);`}
               }
-              ${isLargeRow ? `max-height: 250px` : `max-height: 120px;`}
+              ${isLargeRow ? `max-height: 254px` : `max-height: 154px`}
             `}
           >
             <Image
@@ -64,6 +67,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
               alt={element.name}
               width={`${isLargeRow ? 200 : 250}`}
               height={`${isLargeRow ? 250 : 150}`}
+              className={{ border: "1px solid" }}
               layout="fixed"
               objectFit="fill"
             />
