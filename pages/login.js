@@ -9,7 +9,7 @@ import SubmitButton from "../components/SubmitButton";
 import * as Yup from "yup";
 import loginbackground from "../src/pictures/loginbackground.jpg";
 import Image from "next/image";
-import { useSession, signIn } from "next-auth/react";
+import { useSession, signIn, getProviders } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const containerStyled = css`
@@ -67,8 +67,8 @@ const buttonStyled = {
   },
 };
 
-const login = () => {
-  const { data: session, status } = useSession();
+const login = ({ providers }) => {
+  const { data: session } = useSession();
   const router = useRouter();
 
   const loginUser = async (email, password) => {
@@ -235,3 +235,13 @@ const login = () => {
 };
 
 export default login;
+
+export const getServerSideProps = async (context) => {
+  const providers = await getProviders();
+
+  return {
+    props: {
+      providers,
+    },
+  };
+};

@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 
 const Index = () => {
   const { data: session, status } = useSession();
+  console.log(session);
 
   if (status === "loading") {
     return (
@@ -29,17 +30,17 @@ const Index = () => {
     );
   }
 
-  if (status !== "authenticated") {
-    return <HomeUnlogged />;
-  }
+  // if (status !== "authenticated") {
+  //   return <HomeUnlogged />;
+  // }
 
-  if (status === "authenticated") {
-    return (
-      <Layout pageTitle="Netflixapp - Home Page">
-        <Home />
-      </Layout>
-    );
-  }
+  // if (status === "authenticated") {
+  return (
+    <Layout pageTitle="Netflixapp - Home Page">
+      <Home />
+    </Layout>
+  );
+  // }
 };
 
 export default Index;
