@@ -1,11 +1,12 @@
 /*
  * @jsxImportSource @emotion/react
  */
-import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useState, useEffect } from "react";
 import axios from "../src/axios";
 import Image from "next/image";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const Row = ({ title, fetchUrl, isLargeRow }) => {
   const [movies, setMovies] = useState([]);
@@ -19,8 +20,6 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     };
     getMovies();
   }, [fetchUrl]);
-
-  console.log(movies);
 
   return (
     <div

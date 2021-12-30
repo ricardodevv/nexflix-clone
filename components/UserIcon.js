@@ -23,7 +23,6 @@ const UserIcon = () => {
   const [icon, setIcon] = useState(yellowIcon);
   const [modal, setModal] = useState(false);
   const icons = [yellowIcon, redIcon, blueIcon];
-  console.log(icons.map((el) => el));
 
   const selectedIcon = (icon) => {
     setIcon(icon);

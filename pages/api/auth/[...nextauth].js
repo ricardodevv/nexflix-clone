@@ -107,14 +107,4 @@ export default NextAuth({
       return Promise.resolve("/");
     },
   },
-
-  // callbacks: {
-  //   async jwt(token, account) {
-  //     if (account?.accesToken) {
-  //       token.accesToken = account.accesToken;
-  //     }
-  //     return token;
-  //   },
-  //
-  // },
 });

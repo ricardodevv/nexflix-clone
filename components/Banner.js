@@ -13,6 +13,7 @@ const BannerStyled = styled.header`
   background-position: center center;
   object-fit: contain;
   height: 615px;
+  transition: background 1s linear;
 
   .banner__fadeBottom {
     height: 27.4rem;
@@ -68,20 +69,23 @@ const BannerContents = styled.div`
 const Banner = () => {
   const [movie, setMovie] = useState([]);
 
+  const randomMovie = (request) => {
+    setMovie(
+      request.data.results[
+        Math.floor(Math.random() * request.data.results.length)
+      ]
+    );
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const request = await axios(requests.fetchNetflixOriginals);
-      setMovie(
-        request.data.results[
-          Math.floor(Math.random() * request.data.results.length)
-        ]
-      );
+      randomMovie(request);
+      setInterval(() => randomMovie(request), 10000);
       return request;
     };
     fetchData();
   }, []);
-
-  console.log(movie);
 
   const truncate = (str, n) => {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str;

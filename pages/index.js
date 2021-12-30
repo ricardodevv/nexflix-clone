@@ -1,9 +1,7 @@
 /*
  * @jsxImportSource @emotion/react
  */
-import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import Layout from "../components/Layout";
 import Home from "../components/Home";
 import HomeUnlogged from "../components/HomeUnlogged";
 import { useSession } from "next-auth/react";
@@ -30,17 +28,13 @@ const Index = () => {
     );
   }
 
-  // if (status !== "authenticated") {
-  //   return <HomeUnlogged />;
-  // }
+  if (!session) {
+    return <HomeUnlogged />;
+  }
 
-  // if (status === "authenticated") {
-  return (
-    <Layout pageTitle="Netflixapp - Home Page">
-      <Home />
-    </Layout>
-  );
-  // }
+  if (session) {
+    return <Home />;
+  }
 };
 
 export default Index;
