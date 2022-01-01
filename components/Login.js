@@ -1,7 +1,6 @@
 /*
  * @jsxImportSource @emotion/react
  */
-import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import loginbackground from "../src/pictures/loginbackground.jpg";
 import Image from "next/image";
