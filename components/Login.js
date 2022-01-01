@@ -66,7 +66,20 @@ const buttonStyled = {
   },
 };
 
-const Login = ({ status }) => {
+const ProviderButton = css`
+  background-color: #f7f7f7;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  margin: 7px 0;
+  padding: 0.8rem;
+  color: #2e2e2e;
+  cursor: pointer;
+  font-size: smaller;
+  text-align: center;
+`;
+
+const Login = ({ status, providers }) => {
   const loginUser = async (email, password) => {
     try {
       signIn("google");
@@ -74,8 +87,6 @@ const Login = ({ status }) => {
       console.log(error);
     }
   };
-
-  console.log(status);
 
   if (status === "unauthenticated") {
     return (
@@ -213,6 +224,9 @@ const Login = ({ status }) => {
                           {formik.errors.password}
                         </div>
                       ) : null}
+                      <div css={ProviderButton} onClick={() => loginUser()}>
+                        <b>Sign in with {providers.google.name}</b>
+                      </div>
                       <SubmitButton type="submit" buttonStyled={buttonStyled}>
                         Sign in
                       </SubmitButton>

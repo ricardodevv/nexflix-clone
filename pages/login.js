@@ -24,7 +24,7 @@ const login = ({ providers }) => {
   return (
     <div>
       <Loading status={status} />
-      <Login status={status} />
+      <Login status={status} providers={providers} />
     </div>
   );
 };
