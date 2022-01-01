@@ -2,17 +2,17 @@
  * @jsxImportSource @emotion/react
  */
 import Image from "next/image";
-import { useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/router";
 import netflixLoaderIcon from "../src/pictures/Netflix_LoadTime.gif";
 import Loading from "../components/Loading";
 import Login from "../components/Login";
+import { useStateValue } from "../components/StateProvider";
 
 const login = () => {
-  const { data: session, status } = useSession();
+  const [store, dispatch] = useStateValue();
   const router = useRouter();
 
-  if (status === "authenticated") {
+  if (store.user.length > 0) {
     router.replace("/");
     return (
       <div>
@@ -23,8 +23,8 @@ const login = () => {
 
   return (
     <div>
-      <Loading status={status} />
-      <Login status={status} />
+      <Loading />
+      <Login />
     </div>
   );
 };

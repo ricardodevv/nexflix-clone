@@ -4,13 +4,11 @@
 import Image from "next/image";
 import { useState } from "react";
 import loadingGif from "../src/pictures/Netflix_LoadTime.gif";
+import { useStateValue } from "./StateProvider";
 
 const Loading = ({ status }) => {
+  const [store, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = useState(true);
-
-  if (status === "unauthenticated" && isLoading) {
-    setIsLoading(!isLoading);
-  }
 
   console.log(isLoading);
 

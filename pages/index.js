@@ -4,35 +4,15 @@
 import { css } from "@emotion/react";
 import Home from "../components/Home";
 import HomeUnlogged from "../components/HomeUnlogged";
-import { useSession } from "next-auth/react";
+import { useStateValue } from "../components/StateProvider";
 
 const Index = () => {
-  const { data: session, status } = useSession();
-  console.log(session);
+  const [store, dispatch] = useStateValue();
+  console.log(store.user.length);
 
-  if (status === "loading") {
-    return (
-      <div
-        css={css`
-          backgorund-color: black;
-        `}
-      >
-        <p
-          css={css`
-            color: white;
-          `}
-        >
-          Loading...
-        </p>
-      </div>
-    );
-  }
-
-  if (!session) {
+  if (store.user.length === 0) {
     return <HomeUnlogged />;
-  }
-
-  if (session) {
+  } else {
     return <Home />;
   }
 };

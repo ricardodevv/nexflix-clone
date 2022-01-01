@@ -10,6 +10,8 @@ import styled from "@emotion/styled";
 import SelectLang from "./SelectLang";
 import { useSession, signOut } from "next-auth/react";
 import UserIcon from "./UserIcon";
+import { useStateValue } from "./StateProvider";
+import { logOut } from "./Reducer";
 
 const SelectLangStyled = css`
   #selectContainer {
@@ -82,7 +84,7 @@ const LogoLogin = styled(Logo)(() => ({
 
 const Header = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const [store, dispatch] = useStateValue();
 
   return router.route !== "/login" ? (
     <HeaderBox>
@@ -104,7 +106,7 @@ const Header = () => {
           `}
         ></div>
 
-        {!session ? (
+        {store.user.length === 0 ? (
           <div
             css={css`
               display: flex;
@@ -137,7 +139,9 @@ const Header = () => {
             `}
           >
             <UserIcon />
-            <Button onClick={() => signOut()}>Log out</Button>
+            <Button onClick={() => dispatch(logOut(store.user[0]))}>
+              Log out
+            </Button>
           </div>
         )}
       </Box>
