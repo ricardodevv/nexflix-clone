@@ -11,6 +11,7 @@ const Layout = ({ pageTitle, children }) => {
       css={css`
         background-color: #111;
         height: 100%;
+        width: 100vw;
         color: white;
       `}
     >

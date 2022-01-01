@@ -39,13 +39,12 @@ const containerStyled = css`
   flex: 1;
   position: relative;
   display: flex;
-  margin: 0.3rem 0;
   align-items: center;
 `;
 
 const labelStyled = css`
   position: absolute;
-  top: -0.5rem;
+  top: -0.2rem;
   width: 100%;
   transition: 0.2s;
   color: #525252c7;
@@ -53,7 +52,7 @@ const labelStyled = css`
 `;
 
 const labelTransition = css`
-  top: -1.3rem;
+  top: -1rem;
   transition: 0.1s;
   font-size: 0.8rem;
   font-weight: 700;
@@ -68,6 +67,10 @@ const inputStyled = css`
   height: fit-content;
   z-index: 1;
   background-color: transparent;
+`;
+
+const inputError = css`
+  border-bottom: 2px solid #ff9900;
 `;
 
 const GetStartedField = () => {
@@ -112,6 +115,7 @@ const GetStartedField = () => {
                 formikErrors={formik.errors.email}
                 formikTouched={formik.touched.email}
                 formikOnChange={formik.handleChange}
+                inputError={inputError}
               />
               <SubmitButton type="submit" buttonStyled={buttonStyled}>
                 <p

@@ -81,6 +81,7 @@ const HomeUnlogged = () => {
                 z-index: 4;
                 align-items: center;
                 justify-content: center;
+                padding-top: 6rem;
               `}
             >
               <h2

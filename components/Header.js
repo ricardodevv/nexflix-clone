@@ -71,7 +71,7 @@ const HeaderBox = styled("div")(() => ({
 }));
 
 const Logo = styled("div")(() => ({
-  maxWidth: "12.5rem",
+  maxWidth: "10.5rem",
   padding: "1rem",
   margin: "1rem 2rem",
 }));
