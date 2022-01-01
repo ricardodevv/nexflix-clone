@@ -1,6 +1,7 @@
 /*
  * @jsxImportSource @emotion/react
  */
+import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import loginbackground from "../src/pictures/loginbackground.jpg";
 import Image from "next/image";
@@ -79,7 +80,7 @@ const ProviderButton = css`
   text-align: center;
 `;
 
-const Login = ({ status, providers }) => {
+const Login = ({ status }) => {
   const loginUser = async (email, password) => {
     try {
       signIn("google");
@@ -224,8 +225,11 @@ const Login = ({ status, providers }) => {
                           {formik.errors.password}
                         </div>
                       ) : null}
-                      <div css={ProviderButton} onClick={() => loginUser()}>
-                        <b>Sign in with {providers.google.name}</b>
+                      <div
+                        css={ProviderButton}
+                        onClick={() => signIn("google")}
+                      >
+                        <b>Sign in with Google</b>
                       </div>
                       <SubmitButton type="submit" buttonStyled={buttonStyled}>
                         Sign in

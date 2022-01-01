@@ -8,7 +8,7 @@ import netflixLoaderIcon from "../src/pictures/Netflix_LoadTime.gif";
 import Loading from "../components/Loading";
 import Login from "../components/Login";
 
-const login = ({ providers }) => {
+const login = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -24,19 +24,19 @@ const login = ({ providers }) => {
   return (
     <div>
       <Loading status={status} />
-      <Login status={status} providers={providers} />
+      <Login status={status} />
     </div>
   );
 };
 
 export default login;
 
-export const getServerSideProps = async (context) => {
-  const providers = await getProviders();
+// export const getServerSideProps = async (context) => {
+//   const providers = await getProviders();
 
-  return {
-    props: {
-      providers,
-    },
-  };
-};
+//   return {
+//     props: {
+//       providers,
+//     },
+//   };
+// };
