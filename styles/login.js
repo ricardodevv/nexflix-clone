@@ -2,6 +2,7 @@
  * @jsxImportSource @emotion/react
  */
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 const containerStyled = css`
   flex: 1;
@@ -71,6 +72,38 @@ const ProviderButton = css`
   text-align: center;
 `;
 
+const MainContainer = styled.div`
+  background-color: black;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 0;
+`;
+
+const ImageContainer = styled.div`
+  height: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.5;
+`;
+
+const LoginContainer = styled.div`
+  display: flex;
+  min-height: 100vh;
+`;
+
+const FormContainer = styled.div`
+  margin: 6rem auto;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 2rem 4rem;
+  width: 27rem;
+`;
+
 export {
   containerStyled,
   labelStyled,
@@ -79,4 +112,8 @@ export {
   inputError,
   buttonStyled,
   ProviderButton,
+  MainContainer,
+  ImageContainer,
+  LoginContainer,
+  FormContainer,
 };

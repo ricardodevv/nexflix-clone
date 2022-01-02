@@ -139,7 +139,21 @@ const Header = () => {
             `}
           >
             <UserIcon />
-            <Button onClick={() => dispatch(logOut(store.user[0]))}>
+            <Button
+              sx={{
+                textTransform: "none",
+                backgroundColor: "black",
+                color: "white",
+                fontSize: 17,
+                ml: 3,
+                p: "2px 15px",
+                "&:hover": {
+                  transition: "none",
+                  backgroundColor: "black",
+                },
+              }}
+              onClick={() => dispatch(logOut(store.user[0]))}
+            >
               Log out
             </Button>
           </div>

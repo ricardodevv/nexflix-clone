@@ -7,10 +7,13 @@ import axios from "../src/axios";
 import Image from "next/image";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 const Row = ({ title, fetchUrl, isLargeRow }) => {
   const [movies, setMovies] = useState([]);
   const imagesUrl = "https://image.tmdb.org/t/p/original/";
+
+  console.log(movies.map((el) => el));
 
   useEffect(() => {
     const getMovies = async () => {
@@ -50,7 +53,6 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
               border: 2px solid #111;
 
               :hover {
-                opacity: 1;
                 border: 2px solid white;
                 ${isLargeRow
                   ? `transform: scale(1.09);`
@@ -70,6 +72,54 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
               layout="fixed"
               objectFit="fill"
             />
+            <div
+              css={css`
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                transition: all 0.2s;
+                width: 100%;
+                height: 100%;
+                position: relative;
+                top: ${isLargeRow ? "-254px" : "-154px"};
+                :hover {
+                  background-color: #00000080;
+
+                  h3,
+                  i {
+                    opacity: 1;
+                  }
+                }
+              `}
+            >
+              <i
+                css={css`
+                  flex: 1;
+                  display: flex;
+                  justify-content: center;
+                  transition: all 0.3s;
+                  opacity: 0;
+
+                  .MuiSvgIcon-root {
+                    width: 5rem;
+                    height: 5rem;
+                    align-self: center;
+                  }
+                `}
+              >
+                <PlayArrowIcon />
+              </i>
+              <h3
+                css={css`
+                  font-size: calc(100%);
+                  transition: all 0.3s;
+                  opacity: 0;
+                `}
+              >
+                {element.name ? element.name : element.title}
+              </h3>
+            </div>
           </div>
         ))}
       </div>

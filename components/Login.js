@@ -14,10 +14,14 @@ import { setUser } from "./Reducer";
 import {
   buttonStyled,
   containerStyled,
+  ImageContainer,
   inputError,
   inputStyled,
   labelStyled,
   labelTransition,
+  LoginContainer,
+  MainContainer,
+  FormContainer,
 } from "../styles/login";
 
 const Login = ({ status }) => {
@@ -34,49 +38,17 @@ const Login = ({ status }) => {
   if (store.user.length === 0) {
     return (
       <Layout>
-        <div
-          css={css`
-            background-color: black;
-            min-height: 100%;
-            margin: 0;
-            padding: 0;
-            position: relative;
-            z-index: 0;
-          `}
-        >
-          <div
-            css={css`
-              height: 100%;
-              min-height: 100vh;
-              overflow: hidden;
-              display: block;
-              position: absolute;
-              width: 100%;
-              z-index: -1;
-              opacity: 0.5;
-            `}
-          >
+        <MainContainer>
+          <ImageContainer>
             <Image
               src={loginbackground}
               alt="background cover"
               layout="fill"
               objectFit="cover"
             />
-          </div>
-          <div
-            css={css`
-              display: flex;
-              min-height: 100vh;
-            `}
-          >
-            <div
-              css={css`
-                margin: 6rem auto;
-                background-color: rgba(0, 0, 0, 0.75);
-                padding: 2rem 4rem;
-                width: 27rem;
-              `}
-            >
+          </ImageContainer>
+          <LoginContainer>
+            <FormContainer>
               <div
                 css={css`
                   width: 100%;
@@ -174,9 +146,9 @@ const Login = ({ status }) => {
                   )}
                 </Formik>
               </div>
-            </div>
-          </div>
-        </div>
+            </FormContainer>
+          </LoginContainer>
+        </MainContainer>
       </Layout>
     );
   } else {
